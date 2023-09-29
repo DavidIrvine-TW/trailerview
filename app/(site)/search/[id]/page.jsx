@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import { fetcher } from "../../../utils/fetcher";
 import useSWR from "swr";
-import SearchBar from "../../../components/ui/searchbar/SearchBar";
-import SearchBarDesktopOnly from "../../../components/ui/searchbar/SearchBarDesktopOnly";
+import SearchBar from "../../../components/UI/searchbar/SearchBar";
+import SearchBarDesktopOnly from "../../../components/UI/searchbar/SearchBarDesktopOnly";
 import Loading from "../../../components/UI/load/Loading";
 import { useSearchParams } from "next/navigation";
 import CardRegular from "@/app/components/cards/CardRegular";

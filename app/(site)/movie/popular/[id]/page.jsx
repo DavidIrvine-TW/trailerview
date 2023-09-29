@@ -1,7 +1,7 @@
 import React from "react";
 import SearchBar from "../../../../components/UI/searchbar/SearchBar";
 import CollectionPageTemplate from "../../../../components/UI/collections/CollectionPageTemplate";
-import SearchBarDesktopOnly from "../../../../components/ui/searchbar/SearchBarDesktopOnly";
+import SearchBarDesktopOnly from "../../../../components/UI/searchbar/SearchBarDesktopOnly";
 
 const page = ({ params }) => {
   return (
