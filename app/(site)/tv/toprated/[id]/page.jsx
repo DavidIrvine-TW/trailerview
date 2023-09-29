@@ -1,0 +1,27 @@
+import React from "react";
+
+import SearchBar from "../../../../components/UI/searchbar/SearchBar";
+import CollectionPageTemplate from "../../../../components/UI/collections/CollectionPageTemplate";
+import SearchBarDesktopOnly from "../../../../components/UI/searchbar/SearchBarDesktopOnly";
+
+const page = ({ params }) => {
+  return (
+    <>
+      <SearchBar placeholder="Search TV Series" searchPath="/search/tv/" />
+      <main className=" bg-background border-t border-primary min-h-screen">
+        <SearchBarDesktopOnly
+          placeholder="Search TV Series"
+          searchPath="/search/tv/"
+        />
+        <CollectionPageTemplate
+          title="Top-Rated"
+          params={params}
+          endpoint="/api/tv/toprated/"
+          mediaType="tv"
+        />
+      </main>
+    </>
+  );
+};
+
+export default page;

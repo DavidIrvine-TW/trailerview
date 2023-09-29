@@ -1,0 +1,354 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+html {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #fafafa;
+}
+
+@media screen and (min-width: 900px){
+  body {
+    background-color: #212121
+  }
+}
+img {
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  max-height: 100%;
+}
+ul {
+  list-style: none;
+}
+.dropdown-menu.active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: 0.3s ease;
+}
+.dropdown-menu.inactive {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: 0.3s ease;
+}
+
+.youtube-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  z-index: 1;
+  cursor: pointer;
+}
+
+#overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  z-index: 100;
+}
+
+/* swiper styles */
+:root {
+  --swiper-navigation-size: 35px !important;
+  --swiper-scrollbar-size: 5px !important;
+}
+@media screen and (max-width: 768px){
+  :root {
+    --swiper-navigation-size: 15px !important;
+    
+  }
+
+}
+
+.swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
+  background: #fc4747 !important;
+}
+.swiper-pagination-progressbar {
+  background-color: #212121!important;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  color: white;
+}
+
+.swiper-button-next:hover:after,
+.swiper-button-prev:hover:after {
+  transform: scale(1.5);
+  font-weight: bold;
+}
+
+.fade-in {
+  -webkit-animation: scale-in-center 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    both;
+  animation: scale-in-center 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@-webkit-keyframes scale-in-center {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes scale-in-center {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.tracking-in-expand {
+  -webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.61, 0.355, 1)
+    both;
+  animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.61, 0.355, 1) both;
+}
+
+@-webkit-keyframes tracking-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes tracking-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.container {
+  position: relative;
+  width: 50%;
+}
+
+img {
+  opacity: 1;
+  display: block;
+  /* width: 100%; */
+  /* height: auto; */
+  transition: 0.5s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: 0.5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.container:hover .image {
+  opacity: 0.3;
+}
+
+.container:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  background-color: #04aa6d;
+  color: white;
+  font-size: 16px;
+  padding: 16px 32px;
+}
+
+/* Loading spinner */
+/* Reference: https://codepen.io/ivillamil/pen/xxaEdB */
+.loader {
+  animation: rotate 1s infinite;
+  height: 50px;
+  width: 50px;
+}
+
+.loader:before,
+.loader:after {
+  border-radius: 50%;
+  content: "";
+  display: block;
+  height: 20px;
+  width: 20px;
+}
+.loader:before {
+  animation: ball1 1s infinite;
+  background-color: #cfcfcf;
+  box-shadow: 30px 0 0 #eeeeee;
+  margin-bottom: 10px;
+}
+.loader:after {
+  animation: ball2 1s infinite;
+  background-color: #0f172a;
+  box-shadow: 30px 0 0 #898989;
+}
+
+@keyframes rotate {
+  0% {
+    -webkit-transform: -webkit-rotate(0deg) -webkit-scale(0.8);
+    -webkit-transform: rotate(0deg) scale(0.8);
+    -moz-transform: -webkit-rotate(0deg) scale(0.8);
+    transform: -webkit-rotate(0deg) scale(0.8);
+  }
+  50% {
+    -webkit-transform: -webkit-rotate(360deg) -webkit-scale(1.2);
+    -webkit-transform: rotate(360deg) scale(1.2);
+    -moz-transform: rotate(360deg) scale(1.2);
+    transform: rotate(360deg) scale(1.2);
+  }
+  100% {
+    -webkit-transform: -webkit-rotate(720deg) -webkit-scale(0.8);
+    -webkit-transform: rotate(720deg) scale(0.8);
+    -moz-transform: rotate(720deg) scale(0.8);
+    transform: rotate(720deg) scale(0.8);
+  }
+}
+
+@keyframes ball1 {
+  0% {
+    box-shadow: 30px 0 0 #cfcfcf;
+  }
+  50% {
+    box-shadow: 0 0 0 #eeeeee;
+    margin-bottom: 0;
+    -webkit-transform: -webkit-translate(15px, 15px);
+    -webkit-transform: translate(15px, 15px);
+    -moz-transform: translate(15px, 15px);
+    transform: translate(15px, 15px);
+  }
+  100% {
+    box-shadow: 30px 0 0 #cfcfcf;
+    margin-bottom: 10px;
+  }
+}
+
+@keyframes ball2 {
+  0% {
+    box-shadow: 30px 0 0 #fc4747;
+  }
+  50% {
+    box-shadow: 0 0 0 #cfcfcf;
+    margin-top: -20px;
+    -webkit-transform: -webkit-translate(15px, 15px);
+    -webkit-transform: translate(15px, 15px);
+    -moz-transform: translate(15px, 15px);
+    transform: translate(15px, 15px);
+  }
+  100% {
+    box-shadow: 30px 0 0 #cfcfcf;
+    margin-top: 0;
+  }
+}
+
+.blah {
+  transition: 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0; /* Start with 0 opacity (completely transparent) */
+  }
+  to {
+    opacity: 1; /* End with 1 opacity (fully visible) */
+  }
+}
+
+/* Apply the animation to an element */
+.fade-in {
+  animation: fadeIn 0.2s ease-in-out; /* Use the fadeIn animation with a duration of 1 second */
+}
+
+#playButton {
+  position: absolute;
+  top: 50%; 
+  left: 50%; 
+  transform: translate(
+    -50%,
+    -50%
+  ); 
+  z-index: 9;
+}
+
+#videoTitle {
+  position: absolute;
+  top: 65%; 
+  left: 50%; 
+  transform: translate(
+    -50%,
+    -50%
+  ); 
+  z-index: 9;
+}
+#videoTitleTrending {
+  position: absolute;
+  top: 65%; 
+  left: 50%; 
+  transform: translate(
+    -50%,
+    -50%
+  ); 
+  z-index: 9;
+}
+@media screen and (max-width: 600px) {
+  #videoTitle {
+    top: 75%;
+  }
+  #videoTitleTrending {
+    top: 60%
+  }
+}
+
+
+
+@keyframes flashing {
+  0% {
+      opacity: 1; /* Fully visible */
+  }
+  50% {
+      opacity: 0; /* Completely transparent */
+  }
+  100% {
+      opacity: 1; /* Back to fully visible */
+  }
+}
+
+/* Apply the animation to the text */
+.flashing-text {
+  animation: flashing 1s infinite; /* Use the 'flashing' animation with a 1-second duration, and repeat infinitely */
+}
