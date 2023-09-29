@@ -45,10 +45,8 @@ const Page = ({ params, mediaType }) => {
                   </span>
                   <span>RESULTS for: </span>
                 </span>
-                '{decodeURI(query)}'
+                {decodeURI(query)}
               </h1>
-
-              {/* title section - page numbers */}
 
               {dataFiltered.length < 20 ? (
                 <div className="font-bold text-body-md text-surface dk:mr-8">

@@ -42,10 +42,10 @@ const Page = ({ params }) => {
                   </span>
                   <span>RESULTS for: </span>
                 </span>
-                '{decodeURI(query)}'
+                {decodeURI(query)}
               </h1>
 
-              {/* title section - page numbers */}
+              
 
               {data.length < 20 ? (
                 <div className="font-bold text-body-md text-surface dk:mr-8">
@@ -62,7 +62,12 @@ const Page = ({ params }) => {
 
             <div className="grid grid-cols-2 tb:grid-cols-3 dk:grid-cols-4 gap-y-2 gap-x-2 tb:gap-y-4 tb:gap-x-4 px-4 tb:px-6 dk:px-8 mt-[2rem]">
               {data.results.slice(0, 20).map((result) => (
-                <CardRegular key={result.id} result={result} media_type mediaType="tv"/>
+                <CardRegular
+                  key={result.id}
+                  result={result}
+                  media_type
+                  mediaType="tv"
+                />
               ))}
             </div>
 

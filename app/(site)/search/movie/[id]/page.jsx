@@ -41,11 +41,10 @@ const Page = ({ params }) => {
                   </span>
                   <span>RESULTS for: </span>
                 </span>
-                '{decodeURI(query)}'
+                {decodeURI(query)}
               </h1>
 
-              {/* title section - page numbers */}
-
+             
               {data.length < 20 ? (
                 <div className="font-bold text-body-md text-surface dk:mr-8">
                   <span>PAGE: 1</span> OF <span>1</span>
