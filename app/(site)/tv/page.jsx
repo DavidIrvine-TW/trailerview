@@ -29,7 +29,7 @@ const Page = () => {
     router.push(
       `/tv/genre/${selectedGenre.id}?&name=${selectedGenre.label}&page=1`
     );
-  }, [selectedGenre]);
+  }, [selectedGenre, router]);
 
 
 

@@ -54,7 +54,7 @@ export function BookmarkProvider({ children }) {
 
     fetchUser(); // Call the function to fetch user data
 
-  }, [session]);
+  }, [session, userEmail]);
 
 
 

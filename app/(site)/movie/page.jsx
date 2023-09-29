@@ -3,7 +3,6 @@ import React, { useState, useEffect, useRef } from "react";
 import GenreSelectComboBox from "@/app/components/combobox/GenreSelectComboBox";
 import { fetcher } from "../../utils/fetcher";
 import useSWR from "swr";
-import Loading from "../../components/UI/load/Loading";
 import { useRouter } from "next/navigation";
 import SearchBar from "@/app/components/UI/searchbar/SearchBar";
 import SearchBarDesktopOnly from "../../components/UI/searchbar/SearchBarDesktopOnly";
@@ -31,7 +30,7 @@ const Page = () => {
     router.push(
       `/movie/genre/${selectedGenre.id}?&name=${selectedGenre.label}`
     );
-  }, [selectedGenre]);
+  }, [selectedGenre, router]);
 
   return (
     <>

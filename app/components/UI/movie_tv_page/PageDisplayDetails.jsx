@@ -27,6 +27,7 @@ const PageDisplayDetails = ({ mediaType, data }) => {
                 ? `https://image.tmdb.org/t/p/original/${data.movieDetail.poster_path}`
                 : ""
             }
+            alt="movie poster"
             style={{ objectFit: "contain" }}
             // alt={title}
             fallback={<Shimmer width={350} height={530} />}

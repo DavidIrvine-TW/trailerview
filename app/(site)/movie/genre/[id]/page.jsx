@@ -33,7 +33,7 @@ const Page = ({params}) => {
     router.push(
       `/movie/genre/${selectedGenre.id}?&name=${selectedGenre.label}`
     );
-  }, [selectedGenre]);
+  }, [selectedGenre, router]);
 
   return (
     <>

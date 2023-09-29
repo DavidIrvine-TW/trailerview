@@ -17,6 +17,7 @@ import PageDisplayDetailsTV from './PageDisplayDetailsTV'
 import { useRouter } from "next/navigation";
 
 const MainPageTV= ({ params }) => {
+  const router = useRouter()
   // set display info/video
   const [pageDisplay, setPageDisplay] = useState(2);
   //data fetch
@@ -27,7 +28,7 @@ const MainPageTV= ({ params }) => {
     console.error("Error:", error);
     return <div>Yikes..... there was an error loading your data!</div>;
   }
-  const router = useRouter()
+  
   const handleGoBack = () => {
     router.back(id);
   };

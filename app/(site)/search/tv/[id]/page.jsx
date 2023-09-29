@@ -9,7 +9,7 @@ import { useSearchParams } from "next/navigation";
 import CardRegular from "@/app/components/cards/CardRegular";
 import PaginationComponent from "@/app/components/UI/pagination/PaginationComponent";
 
-const page = ({ params }) => {
+const Page = ({ params }) => {
   const [page, setPage] = useState(1);
   const query = params.id;
   const endpoint = `/api/search/tv/${query}?page=${page}`;
@@ -40,7 +40,7 @@ const page = ({ params }) => {
                   <span className="mr-[.5rem] font-bold text-heading-sm dk:text-heading-lg">
                     {data.total_results}
                   </span>
-                  <i>RESULTS for: </i>
+                  <span>&apos;RESULTS for: &apos;</span>
                 </span>
                 '{decodeURI(query)}'
               </h1>
@@ -81,4 +81,4 @@ const page = ({ params }) => {
   );
 };
 
-export default page;
+export default Page;

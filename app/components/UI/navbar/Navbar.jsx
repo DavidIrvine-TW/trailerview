@@ -51,7 +51,7 @@ const Navbar = () => {
 
   useEffect(() => {
     router.push("/");
-  }, [session]);
+  }, [session, router]);
 
   // console.log(session?.user.email)
   

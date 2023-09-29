@@ -9,7 +9,7 @@ import { useSearchParams } from "next/navigation";
 import CardRegular from "@/app/components/cards/CardRegular";
 import PaginationComponent from "@/app/components/UI/pagination/PaginationComponent";
 
-const page = ({ params, mediaType }) => {
+const Page = ({ params, mediaType }) => {
   const [page, setPage] = useState(1);
   const query = params.id;
   const endpoint = `/api/search/${query}?page=${page}`;
@@ -23,9 +23,6 @@ const page = ({ params, mediaType }) => {
     ? data.results.filter((result) => result.media_type !== "person")
     : [];
 
-
-  console.log(data)
-  console.log(dataFiltered);
 
   return (
     <>
@@ -46,7 +43,7 @@ const page = ({ params, mediaType }) => {
                   <span className="mr-[.5rem] font-bold text-heading-lg">
                     {dataFiltered.length}
                   </span>
-                  <i>RESULTS for: </i>
+                  <span>&apos;RESULTS for: &apos;</span>
                 </span>
                 '{decodeURI(query)}'
               </h1>
@@ -91,4 +88,4 @@ const page = ({ params, mediaType }) => {
   );
 };
 
-export default page;
+export default Page;

@@ -30,7 +30,7 @@ const Page = ({params}) => {
     router.push(
       `/tv/genre/${selectedGenre.id}?&name=${selectedGenre.label}&page=1`
     );
-  }, [selectedGenre]);
+  }, [selectedGenre, router]);
 
   return (
     <>
