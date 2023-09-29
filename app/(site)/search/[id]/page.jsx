@@ -43,7 +43,7 @@ const Page = ({ params, mediaType }) => {
                   <span className="mr-[.5rem] font-bold text-heading-lg">
                     {dataFiltered.length}
                   </span>
-                  <span>&#39;RESULTS for: &#39;</span>
+                  <span>RESULTS for: </span>
                 </span>
                 '{decodeURI(query)}'
               </h1>
