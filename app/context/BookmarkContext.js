@@ -9,16 +9,10 @@ export function useBookmarkContext() {
 }
 
 export function BookmarkProvider({ children }) {
-
   const [bookmarkedCards, setBookmarkedCards] = useState([]);
- 
+
   const { data: session } = useSession();
   const userEmail = session?.user.email;
-
-
-  
-
-
 
   useEffect(() => {
     if (!session) {
@@ -53,13 +47,10 @@ export function BookmarkProvider({ children }) {
     };
 
     fetchUser(); // Call the function to fetch user data
-
   }, [session, userEmail]);
 
-
-
   // const signOutAndSaveBookmarks = async (e) => {
-   
+
   //   try {
   //     const response = await fetch('/api/savebookmarks', {
   //       method: 'POST',
@@ -79,9 +70,6 @@ export function BookmarkProvider({ children }) {
   //   }
   //   signOut()
   // }
-
-
-  
 
   const addBookmark = (card, userEmail, mediaType) => {
     // Associate the card with the user's email
