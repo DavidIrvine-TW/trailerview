@@ -11,19 +11,12 @@ import GenrePagetemplate from "@/app/components/UI/genre_template_page/GenrePage
 
 
 const Page = ({params}) => {
-
   const router = useRouter();
   const endpoint = "/api/movie";
-  
   const { data, error } = useSWR(endpoint, fetcher); //fetch genre list
   const [selectedGenre, setSelectedGenre] = useState({});//user clicks into box and selects genre
-  
   const firstRender = useRef(true);
 
-  if (error) {
-    console.error("Error:", error);
-    return <div>Error loading data</div>;
-  }
   //fires upon selection of a genre
   useEffect(() => {
     if (firstRender.current) {
@@ -34,6 +27,12 @@ const Page = ({params}) => {
       `/movie/genre/${selectedGenre.id}?&name=${selectedGenre.label}`
     );
   }, [selectedGenre, router]);
+
+  if (error) {
+    console.error("Error:", error);
+    return <div>Error loading data</div>;
+  }
+  
 
   return (
     <>

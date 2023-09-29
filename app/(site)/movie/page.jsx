@@ -17,11 +17,6 @@ const Page = () => {
   const [selectedGenre, setSelectedGenre] = useState({});
   const firstRender = useRef(true);
 
-  if (error) {
-    console.error("Error:", error);
-    return <div>Error loading data</div>;
-  }
-
   useEffect(() => {
     if (firstRender.current) {
       firstRender.current = false;
@@ -32,6 +27,13 @@ const Page = () => {
     );
   }, [selectedGenre, router]);
 
+
+  if (error) {
+    console.error("Error:", error);
+    return <div>Error loading data</div>;
+  }
+
+  
   return (
     <>
       <SearchBar

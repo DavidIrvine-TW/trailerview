@@ -17,11 +17,6 @@ const Page = ({params}) => {
   const [selectedGenre, setSelectedGenre] = useState({});
   const firstRender = useRef(true);
 
-  if (error) {
-    console.error("Error:", error);
-    return <div>Error loading data</div>;
-  }
-
   useEffect(() => {
     if (firstRender.current) {
       firstRender.current = false;
@@ -31,6 +26,13 @@ const Page = ({params}) => {
       `/tv/genre/${selectedGenre.id}?&name=${selectedGenre.label}&page=1`
     );
   }, [selectedGenre, router]);
+
+  if (error) {
+    console.error("Error:", error);
+    return <div>Error loading data</div>;
+  }
+
+  
 
   return (
     <>

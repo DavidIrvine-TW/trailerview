@@ -39,7 +39,7 @@ const Page = ({ params }) => {
                   <span className="mr-[.5rem] font-bold text-heading-lg">
                     {data.total_results}
                   </span>
-                  <span>&apos;RESULTS for: &apos;</span>
+                  <span>&#39;RESULTS for: &#39;</span>
                 </span>
                 '{decodeURI(query)}'
               </h1>
