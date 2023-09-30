@@ -5,11 +5,25 @@ import { useBookmarkContext } from "../../context/BookmarkContext";
 
 const SignOutBtn = ({ session }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [signingOut, setSigningOut] = useState(false);
   const [savingBookmarks, setSavingBookmarks] = useState(false);
   const { bookmarkedCards } = useBookmarkContext();
-  let menuRef = useRef()
+  const menuStyles = isOpen ? "visible active" : "invisible inactive";
+  let menuRef = useRef();
+
+  useEffect(() => {
+    let handler = (e) => {
+      if (!menuRef.current.contains(e.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
   const openSignOutMenuHandler = () => {
     setIsOpen((prev) => !prev);
   };
@@ -41,22 +55,6 @@ const SignOutBtn = ({ session }) => {
     setSigningOut(false);
   };
 
-  useEffect(() => {
-    let handler = (e) => {
-      if(!menuRef.current.contains(e.target)){
-        setIsOpen(false)
-      }
-    }
-    document.addEventListener('mousedown', handler)
-    
-    return() => {
-      document.removeEventListener('mousedown', handler)
-    }
-
-  })
-
-  const menuStyles = isOpen ? "visible active" : "invisible inactive";
-
   return (
     <div className="relative">
       <div
@@ -76,13 +74,32 @@ const SignOutBtn = ({ session }) => {
         className={`${menuStyles} dropdown-menu bg-background shadow-md border border-surface rounded w-min-content absolute z-10 top-[3rem] right-[0rem] p-2`}
       >
         <ul className="p-2 flex flex-col gap-[.5rem] text-surface">
-          <li onClick={() => {}}><p className="truncate text-ellipsis text-primary text-body-sm">{session.user.email}</p></li>
-          <li>{savingBookmarks ? <p className="text-green-500 flashing-text">Updating bookmarks</p> :<p>Bookmarks <span className="font-bold text-green-500">{bookmarkedCards?.length -1}</span></p>}</li>
+          <li onClick={() => {}}>
+            <p className="truncate text-ellipsis text-primary text-body-sm">
+              {session.user.email}
+            </p>
+          </li>
+          <li>
+            {savingBookmarks ? (
+              <p className="text-green-500 flashing-text">Updating bookmarks</p>
+            ) : (
+              <p>
+                Bookmarks{" "}
+                <span className="font-bold text-green-500">
+                  {bookmarkedCards?.length - 1}
+                </span>
+              </p>
+            )}
+          </li>
           <li
             className="cursor-pointer hover:underline"
             onClick={signOutAndSaveBookmarks}
           >
-           {signingOut ? (<p className="text-green-500 flashing-text">Signing out</p>) : (<p>Sign out</p>)}
+            {signingOut ? (
+              <p className="text-green-500 flashing-text">Signing out</p>
+            ) : (
+              <p>Sign out</p>
+            )}
           </li>
         </ul>
       </div>

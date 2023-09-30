@@ -7,7 +7,7 @@ import Blurb from "./Blurb";
 import Links from "./Links";
 import Cast from "./Cast";
 
-const PageDisplayDetails = ({ mediaType, data }) => {
+const PageDisplayDetails = ({ data }) => {
   const score = data.movieDetail.vote_average;
   const renderRating = (score) => {
     if (score !== undefined) {
@@ -54,15 +54,10 @@ const PageDisplayDetails = ({ mediaType, data }) => {
         id="details-container"
         className=" rounded-lg border border-primary bg-surface p-[1rem] w-full"
       >
-        <Genres 
-          genres={data.movieDetail.genres || []} mediaType="movie" />
-        <Blurb 
-          filmBlurb={data.movieDetail.overview} />
-        <Cast 
-          casts={data.movieCredits.cast} />
-        <Info 
-          mediaType="movie" 
-          data={data} />
+        <Genres genres={data.movieDetail.genres || []} mediaType="movie" />
+        <Blurb filmBlurb={data.movieDetail.overview} />
+        <Cast casts={data.movieCredits.cast} />
+        <Info mediaType="movie" data={data} />
         <Links
           website={data.movieDetail.homepage}
           imdb={data.movieDetail.imdb_id}

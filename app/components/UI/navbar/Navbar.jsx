@@ -4,11 +4,10 @@ import NavHomeBtn from "../../buttons/NavHomeBtn";
 import NavMovieBtn from "../../buttons/NavMovieBtn";
 import NavTVBtn from "../../buttons/NavTVBtn";
 import NavLogoBtn from "../../buttons/NavLogoBtn";
-;
 import { useRouter } from "next13-progressbar";
 import { useBookmarkContext } from "../../../context/BookmarkContext";
 import React, { useEffect, useState } from "react";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { Tooltip } from "react-tooltip";
 import SignInBtn from "../../buttons/SignInBtn";
 import SignOutBtn from "../../buttons/SignOutBtn";
@@ -36,25 +35,25 @@ const Navbar = () => {
     const headerObserver = new IntersectionObserver(handleScroll, {
       root: null, // Use the viewport as the root
       rootMargin: "170px",
-      threshold: 0, // Trigger when the scroll watcher is in the viewport
+      threshold: 0, // Trigger when scroll watcher is in the viewport
     });
 
     if (scrollWatcher) {
       headerObserver.observe(scrollWatcher);
     }
-
-    // Clean up the observer when the component unmounts
+    // Clean up on unmount
     return () => {
       headerObserver.disconnect();
     };
   }, []);
 
-  useEffect(() => {
+  const navigateToHomePage = () => {
     router.push("/");
-  }, [session, router]);
+  };
 
-  // console.log(session?.user.email)
-  
+  useEffect(() => {
+    navigateToHomePage();
+  }, [session]);
 
   return (
     <>
@@ -76,17 +75,14 @@ const Navbar = () => {
               <NavHomeBtn />
               <NavMovieBtn />
               <NavTVBtn />
-              <NavBookmarkBtn disabled={isSession} bookmarkedCards={bookmarkedCards}/>
+              <NavBookmarkBtn
+                disabled={isSession}
+                bookmarkedCards={bookmarkedCards}
+              />
               {session ? "" : <Tooltip id="my-tooltip" />}
             </ul>
 
-            {session?.user ? (
-              <SignOutBtn
-                session={session}
-              />
-            ) : (
-              <SignInBtn />
-            )}
+            {session?.user ? <SignOutBtn session={session} /> : <SignInBtn />}
           </div>
         </nav>
       </header>

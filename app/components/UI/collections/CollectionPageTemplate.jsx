@@ -6,7 +6,6 @@ import CardRegular from "../../cards/CardRegular";
 import PaginationComponent from "../pagination/PaginationComponent";
 import Loading from "../load/Loading";
 
-
 const CollectionPageTemplate = ({ title, endpoint, mediaType }) => {
   const [page, setPage] = useState(1);
 
@@ -15,7 +14,7 @@ const CollectionPageTemplate = ({ title, endpoint, mediaType }) => {
     console.error("Error:", error);
     return <div>Error loading data</div>;
   }
-  console.log(data)
+  console.log(data);
   return (
     <section>
       <div className="flex items-center justify-between bg-background  shadow:md px-4 ">
@@ -27,7 +26,8 @@ const CollectionPageTemplate = ({ title, endpoint, mediaType }) => {
         </h1>
         {data ? (
           <div className="font-bold text-body-md text-surface dk:mr-8">
-            <span>PAGE: {page}</span> OF <span>{data?.total_pages > 500 ? '500' : data.total_pages}</span>
+            <span>PAGE: {page}</span> OF{" "}
+            <span>{data?.total_pages > 500 ? "500" : data.total_pages}</span>
           </div>
         ) : (
           ""
@@ -36,11 +36,7 @@ const CollectionPageTemplate = ({ title, endpoint, mediaType }) => {
 
       <div className="grid grid-cols-2 tb:grid-cols-3 dk:grid-cols-4 gap-y-2 gap-x-2 tb:gap-y-4 tb:gap-x-4 px-4 tb:px-6 dk:px-4 mt-[2rem] bg-background py-[1rem]">
         {data?.results?.slice(0, 20).map((result) => (
-          <CardRegular
-            key={result.id}
-            result={result}
-            mediaType={mediaType}
-          />
+          <CardRegular key={result.id} result={result} mediaType={mediaType} />
         ))}
       </div>
 

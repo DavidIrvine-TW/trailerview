@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 
-const NavProfilePic = ({avatar}) => {
+const NavProfilePic = ({ avatar }) => {
   return (
     <>
       <Image
@@ -9,7 +9,7 @@ const NavProfilePic = ({avatar}) => {
         alt="profile picture"
         width={40}
         height={40}
-        style={{border: '2px solid #0F172A', borderRadius: '50%'}}
+        style={{ border: "2px solid #0F172A", borderRadius: "50%" }}
         className="dk:w-[35px] dk:h-[35px]"
       />
     </>

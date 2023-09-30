@@ -1,25 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 import { Image, Shimmer } from "react-shimmer";
 import YouTube from "react-youtube";
 
-const PosterImage = ({ src, title, playTrailer, data, mediaType, currentVideoIndex }) => {
-  
- 
+const PosterImage = ({
+  src,
+  title,
+  playTrailer,
+  data,
+  currentVideoIndex,
+}) => {
   const renderTrailer = () => {
-    
     // check for officialTrailer if not available then selects the first valid key
-  const officialTrailer = data.movieVideo.results.find(
-    (item) => item.name === "Official Trailer"
-  );
-  const defaultKey = officialTrailer
-    ? officialTrailer.key
-    : data.movieVideo.results[0]?.key; // Use optional chaining to handle potential null
+    const officialTrailer = data.movieVideo.results.find(
+      (item) => item.name === "Official Trailer"
+    );
+    const defaultKey = officialTrailer
+      ? officialTrailer.key
+      : data.movieVideo.results[0]?.key; 
 
-  // Determine the key based on user's choice or the default key
-  const key = currentVideoIndex !== null
-    ? data.movieVideo.results[currentVideoIndex].key
-    : defaultKey;
-      
+    // Determine  key based on user choice || the default key
+    const key =
+      currentVideoIndex !== null
+        ? data.movieVideo.results[currentVideoIndex].key
+        : defaultKey;
+
     return (
       <YouTube
         className={"youtube-container"}
@@ -31,7 +35,7 @@ const PosterImage = ({ src, title, playTrailer, data, mediaType, currentVideoInd
             autoplay: 1,
             controls: 1,
             volume: 50,
-            mute: 0
+            mute: 0,
           },
         }}
       />

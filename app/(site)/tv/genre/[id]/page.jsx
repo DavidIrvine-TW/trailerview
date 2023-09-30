@@ -9,8 +9,7 @@ import SearchBar from "@/app/components/UI/searchbar/SearchBar";
 import SearchBarDesktopOnly from "../../../../components/UI/searchbar/SearchBarDesktopOnly";
 import GenrePagetemplate from "@/app/components/UI/genre_template_page/GenrePageTemplate";
 
-
-const Page = ({params}) => {
+const Page = ({ params }) => {
   const router = useRouter();
   const endpoint = "/api/tv";
   const { data, error } = useSWR(endpoint, fetcher); //fetch genre list
@@ -29,10 +28,12 @@ const Page = ({params}) => {
 
   if (error) {
     console.error("Error:", error);
-    return <div>Error loading data</div>;
+    return (
+      <div className="text-surface text-center">
+        Yikes! There was an error loading your data... please refresh the page.
+      </div>
+    );
   }
-
-  
 
   return (
     <>
@@ -60,9 +61,7 @@ const Page = ({params}) => {
                 searchPath="/search/tv/"
               />
             </div>
-              <GenrePagetemplate mediaType="tv" params={params}/>
-         
-
+            <GenrePagetemplate mediaType="tv" params={params} />
           </>
         ) : (
           <Loading />

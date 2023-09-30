@@ -1,5 +1,6 @@
 import React from "react";
 import SpanTagCast from "../../tags/SpanTagCast";
+
 function Cast({ casts }) {
   return (
     <article className="px-4  dk:my-[1.5rem] dk:px-0 dk:text-heading-xs">

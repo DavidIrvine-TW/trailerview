@@ -9,10 +9,10 @@ import SearchBar from "@/app/components/UI/searchbar/SearchBar";
 import SearchBarDesktopOnly from "../../components/UI/searchbar/SearchBarDesktopOnly";
 import DefaultGenre from "@/app/components/UI/genre_template_page/DefaultGenre";
 
-const Page = () => {
+const page = () => {
   const router = useRouter();
   const endpoint = "/api/tv";
-  const { data, error } = useSWR(endpoint, fetcher); //fetch genre list
+  const { data, error } = useSWR(endpoint, fetcher);
   const [selectedGenre, setSelectedGenre] = useState({});
   const firstRender = useRef(true);
 
@@ -28,12 +28,12 @@ const Page = () => {
 
   if (error) {
     console.error("Error:", error);
-    return <div>Error loading data</div>;
+    return (
+      <div className="text-surface text-center">
+        Yikes! There was an error loading your data... please refresh the page.
+      </div>
+    );
   }
-
-  
-
-
 
   return (
     <>
@@ -62,8 +62,11 @@ const Page = () => {
               />
             </div>
 
-            <DefaultGenre endpoint="/api/tv/defaultgenre/" title="Family" mediaType="tv"/>
-
+            <DefaultGenre
+              endpoint="/api/tv/defaultgenre/"
+              title="Family"
+              mediaType="tv"
+            />
           </>
         ) : (
           <Loading />
@@ -73,4 +76,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default page;

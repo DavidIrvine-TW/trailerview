@@ -3,17 +3,16 @@ import React, { useState, useEffect, useRef } from "react";
 import GenreSelectComboBox from "@/app/components/combobox/GenreSelectComboBox";
 import { fetcher } from "../../utils/fetcher";
 import useSWR from "swr";
+import Loading from "../../components/UI/load/Loading";
 import { useRouter } from "next/navigation";
 import SearchBar from "@/app/components/UI/searchbar/SearchBar";
 import SearchBarDesktopOnly from "../../components/UI/searchbar/SearchBarDesktopOnly";
 import DefaultGenre from "@/app/components/UI/genre_template_page/DefaultGenre";
 
-
-const Page = () => {
-
+const page = () => {
   const router = useRouter();
   const endpoint = "/api/movie";
-  const { data, error } = useSWR(endpoint, fetcher); //fetch genre list
+  const { data, error } = useSWR(endpoint, fetcher);
   const [selectedGenre, setSelectedGenre] = useState({});
   const firstRender = useRef(true);
 
@@ -27,13 +26,15 @@ const Page = () => {
     );
   }, [selectedGenre, router]);
 
-
   if (error) {
     console.error("Error:", error);
-    return <div>Error loading data</div>;
+    return (
+      <div className="text-surface text-center">
+        Yikes! There was an error loading your data... please refresh the page.
+      </div>
+    );
   }
 
-  
   return (
     <>
       <SearchBar
@@ -61,16 +62,18 @@ const Page = () => {
               />
             </div>
 
-            <DefaultGenre endpoint="/api/movie/defaultgenre/" title="Horror" mediaType="movie"/>
-          
+            <DefaultGenre
+              endpoint="/api/movie/defaultgenre/"
+              title="Horror"
+              mediaType="movie"
+            />
           </>
         ) : (
-          // <Loading />
-          ''
+          <Loading />
         )}
       </main>
     </>
   );
 };
 
-export default Page;
+export default page;

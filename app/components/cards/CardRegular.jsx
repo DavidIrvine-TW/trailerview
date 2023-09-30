@@ -109,21 +109,24 @@ const CardRegular = ({ media_type, mediaType, result }) => {
   // process bookmark clicks
   const handleBookmarkClick = () => {
     if (isBookmarked) {
-      toast.info(`${result.title || result.orginal_name || result.name} removed `, {
-        position: "bottom-right",
-        autoClose: 2000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-        style: {
-          background: "#212121",
-          color: "#FC4747",
-          border: '2px solid #fafafa'
-        },
-      });
+      toast.info(
+        `${result.title || result.orginal_name || result.name} removed `,
+        {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          style: {
+            background: "#212121",
+            color: "#FC4747",
+            border: "2px solid #fafafa",
+          },
+        }
+      );
       removeBookmark(result.id, session.user.email);
     } else {
       toast.info(
@@ -141,7 +144,7 @@ const CardRegular = ({ media_type, mediaType, result }) => {
           style: {
             background: "#cfcfcf",
             color: "green",
-            border: '2px solid #fafafa'
+            border: "2px solid #fafafa",
           },
         }
       );
@@ -225,7 +228,7 @@ const CardRegular = ({ media_type, mediaType, result }) => {
               {result.movieData?.results.length >= 1 ? (
                 <div>
                   {result.movieData?.results.length === 1 ? (
-                    ''
+                    ""
                   ) : (
                     <>
                       <button
@@ -243,8 +246,8 @@ const CardRegular = ({ media_type, mediaType, result }) => {
                         />
                       </button>
                       <span className="text-body-sm text-surface">
-
-                        {currentVideoIndex} / {result.movieData?.results.length -1}
+                        {currentVideoIndex} /{" "}
+                        {result.movieData?.results.length - 1}
                       </span>
 
                       <button

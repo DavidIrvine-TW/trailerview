@@ -2,8 +2,6 @@ import React from "react";
 import TvIcon from "@mui/icons-material/Tv";
 import LocalMoviesRoundedIcon from "@mui/icons-material/LocalMoviesRounded";
 
-
-
 const CardTrendingDisplay = ({ result, mediaType, playTrailer }) => {
   const releaseDate = new Date(result.release_date || result.first_air_date);
   const year = releaseDate.getFullYear();
@@ -37,7 +35,6 @@ const CardTrendingDisplay = ({ result, mediaType, playTrailer }) => {
               {result.original_title || result.name}
             </p>
           </div>
-          
         </div>
       </div>
     </div>

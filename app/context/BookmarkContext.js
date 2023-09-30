@@ -16,7 +16,7 @@ export function BookmarkProvider({ children }) {
 
   useEffect(() => {
     if (!session) {
-      return; // Do nothing if there's no session
+      return; // Do nothing if no session
     }
 
     const fetchUser = async () => {
@@ -26,27 +26,23 @@ export function BookmarkProvider({ children }) {
           throw new Error("Failed to fetch user data");
         }
         const userData = await response.json();
-        // console.log(userData)
-        // console.log(userData.userData.bookmarks)
 
         if (userData) {
           const sessionBookmarks = userData.userData.bookmarks || [];
-          // console.log(sessionBookmarks)
+
           localStorage.removeItem("trailerview bookmarks");
           localStorage.setItem(
             "trailerview bookmarks",
             JSON.stringify(sessionBookmarks)
           );
-          // Set user session bookmarks as the current state
           setBookmarkedCards(sessionBookmarks);
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
-        // Handle the error as needed
       }
     };
 
-    fetchUser(); // Call the function to fetch user data
+    fetchUser();
   }, [session, userEmail]);
 
   // const signOutAndSaveBookmarks = async (e) => {
@@ -72,11 +68,9 @@ export function BookmarkProvider({ children }) {
   // }
 
   const addBookmark = (card, userEmail, mediaType) => {
-    // Associate the card with the user's email
     const updatedCard = { ...card, user: userEmail, mediaType };
     const updatedBookmarks = [...bookmarkedCards, updatedCard];
     setBookmarkedCards(updatedBookmarks);
-    // Save updated bookmarks to localStorage
     localStorage.setItem(
       "trailerview bookmarks",
       JSON.stringify(updatedBookmarks)
@@ -88,7 +82,7 @@ export function BookmarkProvider({ children }) {
       (card) => card.id !== cardId || card.user !== userEmail
     );
     setBookmarkedCards(updatedBookmarks);
-    // Save updated bookmarks to localStorage
+    // Save updated bookmarks
     localStorage.setItem(
       "trailerview bookmarks",
       JSON.stringify(updatedBookmarks)

@@ -2,18 +2,16 @@ import React from "react";
 import { Image, Shimmer } from "react-shimmer";
 import YouTube from "react-youtube";
 
-const PosterImageTV = ({ src, title, playTrailer, data, mediaType }) => {
-
+const PosterImageTV = ({ src, title, playTrailer, data }) => {
   // check for officialTrailer if not available then selects the first valid key
   const renderTrailer = () => {
-    
     const officialTrailer = data.tvVideos.results.find(
       (item) => item.name === "Official Trailer"
     );
     const key = officialTrailer
       ? officialTrailer.key
       : data.tvVideos.results[0].key;
-      console.log(key)
+    
 
     return (
       <YouTube
@@ -26,7 +24,7 @@ const PosterImageTV = ({ src, title, playTrailer, data, mediaType }) => {
             autoplay: 1,
             controls: 1,
             volume: 50,
-            mute: 0
+            mute: 0,
           },
         }}
       />

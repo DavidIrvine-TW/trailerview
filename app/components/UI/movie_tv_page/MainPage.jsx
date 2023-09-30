@@ -24,13 +24,14 @@ const MainPage = ({ params }) => {
   const id = params.id;
   const endpoint = "/api/movie/";
   const { data, error } = useSWR(`${endpoint}${id}`, fetcher);
+
   if (error) {
     console.error("Error:", error);
     return <div>Yikes..... there was an error loading your data!</div>;
   }
 
   const handleGoBack = () => {
-    router.back(id); // This will take the user back to the previous page
+    router.back(id); 
   };
 
   return (

@@ -1,8 +1,8 @@
 import React from "react";
 import { useSearchParams } from "next/navigation";
-import useSWR from 'swr';
-import { fetcher } from '../../../utils/fetcher';
-import GenreList from '../../../lib/GenreListTV';
+import useSWR from "swr";
+import { fetcher } from "../../../utils/fetcher";
+import GenreList from "../../../lib/GenreListTV";
 
 const GenrePagetemplate = () => {
   const searchParams = useSearchParams();
@@ -15,10 +15,14 @@ const GenrePagetemplate = () => {
   const endpoint = `/api/tv/genre/${genreId}?&name=${genreName}&page=${page}`;
 
   const { data, error } = useSWR(endpoint, fetcher);
-  
+
   if (error) {
     console.error("Error:", error);
-    return <div>Error loading data</div>;
+    return (
+      <div className="text-surface text-center">
+        Yikes! There was an error loading your data... please refresh the page.
+      </div>
+    );
   }
 
   console.log(endpoint);

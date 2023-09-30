@@ -2,10 +2,10 @@ import React from "react";
 import Pagination from "@mui/material/Pagination";
 
 const paginationComponent = ({ totalPages, setPage, page }) => {
-  const pageNumber = totalPages > 500 ? '500' : totalPages
+  const pageNumber = totalPages > 500 ? "500" : totalPages;
   const handlePageChange = (event, value) => {
     setPage(value);
-    console.log(value)
+    console.log(value);
     scrollToTop();
   };
   const scrollToTop = () => {
@@ -26,13 +26,13 @@ const paginationComponent = ({ totalPages, setPage, page }) => {
         boundaryCount={1}
         page={page}
         sx={{
-          '& .MuiPaginationItem-root': {
-            fontSize: '1.25rem',
-            color: '#e0e0e0', // Set text color for non-selected pages
+          "& .MuiPaginationItem-root": {
+            fontSize: "1.25rem",
+            color: "#e0e0e0", 
           },
-          '& .MuiPaginationItem-page.Mui-selected': {
-            backgroundColor: '#fafafa',
-            color: '#FC4747', // Set text color for selected page
+          "& .MuiPaginationItem-page.Mui-selected": {
+            backgroundColor: "#fafafa",
+            color: "#FC4747", 
           },
         }}
       />

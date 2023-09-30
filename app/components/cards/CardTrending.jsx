@@ -35,21 +35,24 @@ const CardTrending = ({ mediaType, result }) => {
 
   const handleBookmarkClick = () => {
     if (isBookmarked) {
-      toast.info(`${result.title || result.orginal_name || result.name} removed `, {
-        position: "bottom-right",
-        autoClose: 2000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-        style: {
-          background: "#212121",
-          color: "#FC4747",
-          border: '2px solid #fafafa'
-        },
-      });
+      toast.info(
+        `${result.title || result.orginal_name || result.name} removed `,
+        {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          style: {
+            background: "#212121",
+            color: "#FC4747",
+            border: "2px solid #fafafa",
+          },
+        }
+      );
       removeBookmark(result.id, session.user.email);
     } else {
       toast.info(
@@ -67,7 +70,7 @@ const CardTrending = ({ mediaType, result }) => {
           style: {
             background: "#cfcfcf",
             color: "green",
-            border: '2px solid #fafafa'
+            border: "2px solid #fafafa",
           },
         }
       );
@@ -108,14 +111,14 @@ const CardTrending = ({ mediaType, result }) => {
   };
 
   useEffect(() => {
-    // Function to update screen size based on window width
+    //  update screen size based on viewport width
     const updateScreenSize = () => {
       if (window.innerWidth < 500) {
-        setScreenSize(true)
-        setIsHover(true); // Set screenSize to true on small screens
+        setScreenSize(true);
+        setIsHover(true); // true on small screens
       } else {
-        setIsHover(false)
-        setScreenSize(false); // Set screenSize to false on large screens
+        setIsHover(false);
+        setScreenSize(false); // false on large screens
       }
     };
     // Update
@@ -137,9 +140,9 @@ const CardTrending = ({ mediaType, result }) => {
       }}
       onMouseLeave={() => {
         if (screenSize) {
-          setIsHover(true); // Keep isHover as true on small screens when the mouse leaves
+          setIsHover(true);
         } else {
-          setIsHover(false); // Set isHover to false on large screens when the mouse leaves
+          setIsHover(false);
         }
       }}
       className="relative w-full max-h-[240px] overflow-hidden cursor-pointer py-2"
@@ -225,52 +228,52 @@ const CardTrending = ({ mediaType, result }) => {
 
           {/* select a trailer */}
           <div className="absolute left-[2%] top-[5%] gap-[.5rem] z-9">
-              {result.movieData?.results.length >= 1 ? (
-                <div>
-                  {result.movieData?.results.length === 1 ? (
-                    ''
-                  ) : (
-                    <>
-                      <button
-                        onClick={() => changeVideo(-1)}
-                        disabled={currentVideoIndex === 0}
-                      >
-                        <ArrowBackIosNewRoundedIcon
-                          fontSize="small"
-                          sx={{
-                            color: "#fafafa",
-                            "&:hover": {
-                              transform: "scale(1.2)",
-                            },
-                          }}
-                        />
-                      </button>
-                      <span className="text-body-sm text-surface">
+            {result.movieData?.results.length >= 1 ? (
+              <div>
+                {result.movieData?.results.length === 1 ? (
+                  ""
+                ) : (
+                  <>
+                    <button
+                      onClick={() => changeVideo(-1)}
+                      disabled={currentVideoIndex === 0}
+                    >
+                      <ArrowBackIosNewRoundedIcon
+                        fontSize="small"
+                        sx={{
+                          color: "#fafafa",
+                          "&:hover": {
+                            transform: "scale(1.2)",
+                          },
+                        }}
+                      />
+                    </button>
+                    <span className="text-body-sm text-surface">
+                      {currentVideoIndex} /{" "}
+                      {result.movieData?.results.length - 1}
+                    </span>
 
-                        {currentVideoIndex} / {result.movieData?.results.length -1}
-                      </span>
-
-                      <button
-                        onClick={() => changeVideo(1)}
-                        disabled={currentVideoIndex === keyAmount - 1}
-                      >
-                        <ArrowForwardIosRoundedIcon
-                          fontSize="small"
-                          sx={{
-                            color: "#fafafa",
-                            "&:hover": {
-                              transform: "scale(1.2)",
-                            },
-                          }}
-                        />
-                      </button>
-                    </>
-                  )}
-                </div>
-              ) : (
-                <p className="text-body-sm text-surface">No videos found</p>
-              )}
-            </div>
+                    <button
+                      onClick={() => changeVideo(1)}
+                      disabled={currentVideoIndex === keyAmount - 1}
+                    >
+                      <ArrowForwardIosRoundedIcon
+                        fontSize="small"
+                        sx={{
+                          color: "#fafafa",
+                          "&:hover": {
+                            transform: "scale(1.2)",
+                          },
+                        }}
+                      />
+                    </button>
+                  </>
+                )}
+              </div>
+            ) : (
+              <p className="text-body-sm text-surface">No videos found</p>
+            )}
+          </div>
         </div>
       ) : (
         ""
@@ -303,9 +306,9 @@ const CardTrending = ({ mediaType, result }) => {
                   sx={{
                     color: "white",
                     cursor: "pointer",
-                    transition: "transform 0.2s", // Add a CSS transition for 'transform'
+                    transition: "transform 0.2s", 
                     "&:hover": {
-                      transform: "scale(1.3)", // Scale up on hover
+                      transform: "scale(1.3)", 
                     },
                     fontSize: { sm: "2rem", lg: "2.5rem" },
                     display: playTrailer ? "none" : "block",
@@ -321,7 +324,10 @@ const CardTrending = ({ mediaType, result }) => {
 
       {/* video title on hover && session*/}
       {session ? (
-        <div id="videoTitleTrending" className={isHover || screenSize ? "" : "hidden"}>
+        <div
+          id="videoTitleTrending"
+          className={isHover || screenSize ? "" : "hidden"}
+        >
           <p
             className={`${playTitleHide} text-body-sm text-center text-surface truncate text-ellipsis max-w-[150px]`}
           >
@@ -334,8 +340,6 @@ const CardTrending = ({ mediaType, result }) => {
       ) : (
         ""
       )}
-
-      {/* </Link> */}
     </div>
   );
 };

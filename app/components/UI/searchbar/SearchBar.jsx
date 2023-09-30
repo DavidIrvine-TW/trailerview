@@ -5,7 +5,7 @@ import SearchField from "./SearchField";
 import SearchBtn from "../../buttons/SearchBtn";
 import { useRouter } from "next/navigation";
 
-const Searchbar = ({ mediaType, placeholder, searchPath }) => {
+const Searchbar = ({ placeholder, searchPath }) => {
   const router = useRouter();
   const [query, setQuery] = useState("");
 

@@ -1,5 +1,5 @@
 "use client";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import FilmRating from "./FilmRating";
 import Info from "./Info";
 import Cast from "./Cast";
@@ -10,14 +10,13 @@ import Loading from "../load/Loading";
 import { fetcher } from "../../../utils/fetcher";
 import useSWR from "swr";
 import SearchBar from "../searchbar/SearchBar";
-import BackDropImageTV from "./PageDisplayImageTV";
 import StandardBtn from "../../buttons/StandardBtn";
 import PageDisplayImageTV from "./PageDisplayImageTV";
-import PageDisplayDetailsTV from './PageDisplayDetailsTV'
+import PageDisplayDetailsTV from "./PageDisplayDetailsTV";
 import { useRouter } from "next/navigation";
 
-const MainPageTV= ({ params }) => {
-  const router = useRouter()
+const MainPageTV = ({ params }) => {
+  const router = useRouter();
   // set display info/video
   const [pageDisplay, setPageDisplay] = useState(2);
   //data fetch
@@ -28,13 +27,11 @@ const MainPageTV= ({ params }) => {
     console.error("Error:", error);
     return <div>Yikes..... there was an error loading your data!</div>;
   }
-  
+
   const handleGoBack = () => {
     router.back(id);
   };
 
-
- 
   return (
     <>
       {/* header section */}
@@ -42,8 +39,6 @@ const MainPageTV= ({ params }) => {
       <SearchBar placeholder="Search TV Series" searchPath="/search/tv/" />
       {/* maincontent */}
       <section className="bg-surface dk:bg-background ">
-
-
         {/* body section */}
         {data ? (
           // display desktop only
@@ -56,7 +51,7 @@ const MainPageTV= ({ params }) => {
                 <PageDisplayDetailsTV mediaType="tv" data={data} /> // details
               )}
               <div className="flex gap-[2rem] mx-auto mt-4">
-              <div className=" flex flex-start">
+                <div className=" flex flex-start">
                   <StandardBtn onClick={handleGoBack}>Back</StandardBtn>
                 </div>
                 <StandardBtn
@@ -76,21 +71,12 @@ const MainPageTV= ({ params }) => {
 
             {/* small screen display */}
             <article className="dk:hidden">
-              <PageDisplayImageTV 
-                mediaType="tv" 
-                data={data} />
-              <FilmRating 
-                score={data.tvDetail.vote_average} />
-              <Info 
-                mediaType="tv" 
-                data={data} />
-              <Genres 
-                genres={data.tvDetail.genres || []} 
-                mediaType="tv" />
-              <Blurb 
-                filmBlurb={data.tvDetail.overview} />
-              <Cast 
-                casts={data.tvCredits.cast} />
+              <PageDisplayImageTV mediaType="tv" data={data} />
+              <FilmRating score={data.tvDetail.vote_average} />
+              <Info mediaType="tv" data={data} />
+              <Genres genres={data.tvDetail.genres || []} mediaType="tv" />
+              <Blurb filmBlurb={data.tvDetail.overview} />
+              <Cast casts={data.tvCredits.cast} />
               <Links
                 website={data.tvDetail.homepage}
                 imdb={data.tvDetail.imdb_id}

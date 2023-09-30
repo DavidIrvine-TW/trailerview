@@ -1,7 +1,7 @@
 import React from "react";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
-import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
-import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
+import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
+import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 
 function Title({
   filmName,
@@ -56,28 +56,24 @@ function Title({
             </button>
           </div>
 
-
-
           {/* select a trailer */}
           <div className="flex flex-row gap-[.5rem] z-10 items-center">
             <button
               onClick={() => changeVideo(-1)}
               disabled={currentVideoIndex === 0}
             >
-              <ArrowBackIosNewRoundedIcon/> Previous
+              <ArrowBackIosNewRoundedIcon /> Previous
             </button>
 
-            <span>{currentVideoIndex} / {data.movieVideo.results.length}</span>
-
-
-
-
+            <span>
+              {currentVideoIndex} / {data.movieVideo.results.length}
+            </span>
 
             <button
               onClick={() => changeVideo(1)}
               disabled={currentVideoIndex === keyAmount - 1}
             >
-             Next <ArrowForwardIosRoundedIcon/> 
+              Next <ArrowForwardIosRoundedIcon />
             </button>
             <p>Title: {data.movieVideo.results[currentVideoIndex].name}</p>
           </div>

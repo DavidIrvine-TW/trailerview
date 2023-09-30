@@ -5,24 +5,28 @@ import useSWR from "swr";
 import SearchBar from "../../../components/UI/searchbar/SearchBar";
 import SearchBarDesktopOnly from "../../../components/UI/searchbar/SearchBarDesktopOnly";
 import Loading from "../../../components/UI/load/Loading";
-import { useSearchParams } from "next/navigation";
 import CardRegular from "@/app/components/cards/CardRegular";
 import PaginationComponent from "@/app/components/UI/pagination/PaginationComponent";
 
-const Page = ({ params, mediaType }) => {
+const page = ({ params }) => {
   const [page, setPage] = useState(1);
   const query = params.id;
   const endpoint = `/api/search/${query}?page=${page}`;
   const { data, error } = useSWR(endpoint, fetcher);
+
   if (error) {
     console.error("Error:", error);
-    return <div>Error loading data</div>;
+    return (
+      <div className="text-surface text-center">
+        Yikes! There was an error loading your data... please refresh the page.
+      </div>
+    );
   }
+  
   //Remove people from results
   const dataFiltered = data
     ? data.results.filter((result) => result.media_type !== "person")
     : [];
-
 
   return (
     <>
@@ -43,10 +47,12 @@ const Page = ({ params, mediaType }) => {
                   <span className="mr-[.5rem] font-bold text-heading-lg">
                     {dataFiltered.length}
                   </span>
-                  <span>RESULTS for: </span>
+                  <i>RESULTS for: </i>
                 </span>
                 {decodeURI(query)}
               </h1>
+
+              {/* title section - page numbers */}
 
               {dataFiltered.length < 20 ? (
                 <div className="font-bold text-body-md text-surface dk:mr-8">
@@ -86,4 +92,4 @@ const Page = ({ params, mediaType }) => {
   );
 };
 
-export default Page;
+export default page;

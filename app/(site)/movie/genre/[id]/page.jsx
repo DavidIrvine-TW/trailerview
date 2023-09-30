@@ -10,11 +10,12 @@ import SearchBarDesktopOnly from "../../../../components/UI/searchbar/SearchBarD
 import GenrePagetemplate from "@/app/components/UI/genre_template_page/GenrePageTemplate";
 
 
-const Page = ({params}) => {
+const page = ({params}) => {
+
   const router = useRouter();
   const endpoint = "/api/movie";
-  const { data, error } = useSWR(endpoint, fetcher); //fetch genre list
-  const [selectedGenre, setSelectedGenre] = useState({});//user clicks into box and selects genre
+  const { data, error } = useSWR(endpoint, fetcher); 
+  const [selectedGenre, setSelectedGenre] = useState({});
   const firstRender = useRef(true);
 
   //fires upon selection of a genre
@@ -28,9 +29,10 @@ const Page = ({params}) => {
     );
   }, [selectedGenre, router]);
 
+  // SWR 
   if (error) {
     console.error("Error:", error);
-    return <div>Error loading data</div>;
+    return <div className="text-surface text-center">Yikes! There was an error loading your data... please refresh the page.</div>;
   }
   
 
@@ -72,4 +74,4 @@ const Page = ({params}) => {
   );
 };
 
-export default Page;
+export default page;

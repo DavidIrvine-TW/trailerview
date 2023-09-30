@@ -17,7 +17,7 @@ const GenreSelectComboBox = ({ data, setGenreSelected }) => {
       id="combo-box-demo"
       options={genresOptions}
       getOptionLabel={(option) => option.label}
-      sx={{ width: "170px", backgroundColor: "#fafafa", borderRadius: '5%' }}
+      sx={{ width: "170px", backgroundColor: "#fafafa", borderRadius: "5%" }}
       onChange={(event, newValue) => {
         setGenreSelected(newValue);
       }}

@@ -8,13 +8,15 @@ import PaginationComponent from "../pagination/PaginationComponent";
 const DefaultGenre = ({ endpoint, mediaType, title }) => {
   const [page, setPage] = useState(1);
   const { data, error } = useSWR(`${endpoint}${page}`, fetcher);
+  
   if (error) {
     console.error("Error:", error);
-    return <div>Error loading data</div>;
+    return (
+      <div className="text-surface text-center">
+        Yikes! There was an error loading your data... please refresh the page.
+      </div>
+    );
   }
-
-
-  console.log(data)
 
   return (
     <section>
@@ -24,16 +26,19 @@ const DefaultGenre = ({ endpoint, mediaType, title }) => {
           <div className="px-4 dk-px-0 flex items-center justify-between bg-background border-b border-secondary shadow:md ">
             <h1 className=" text-center dk:text-left tracking-in-expand font-bold text-heading-sm dk:text-heading-lg my-2 dk:ml-8 text-surface">
               <span className="text-surface font-bold text-body-sm">
-                <i>GENRE: </i>{" "}
+                <i>GENRE: </i>
               </span>
               {title}
             </h1>
 
-             {/* title section - page numbers */}
+            {/* title section - page numbers */}
 
             {data ? (
               <div className="font-bold dk:text-body-md text-body-sm text-surface dk:mr-8">
-                <span>PAGE: {page}</span> OF <span>{data?.total_pages > 500 ? '500' : data.total_pages}</span>
+                <span>PAGE: {page}</span> OF
+                <span>
+                  {data?.total_pages > 500 ? "500" : data.total_pages}
+                </span>
               </div>
             ) : (
               ""

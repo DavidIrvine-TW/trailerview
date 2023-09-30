@@ -1,5 +1,4 @@
 import { MovieCreationRounded } from "@mui/icons-material/";
-
 import React from "react";
 
 const LogoIcon = () => {

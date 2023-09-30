@@ -8,7 +8,12 @@ import React from "react";
 const MuiThemeProvider = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
-      <Container maxWidth="xl" sx={{p: { xs: "0rem", sm: "0rem", md: "0rem", lg: "0rem" }}}>{children}</Container>
+      <Container
+        maxWidth="xl"
+        sx={{ p: { xs: "0rem", sm: "0rem", md: "0rem", lg: "0rem" } }}
+      >
+        {children}
+      </Container>
     </ThemeProvider>
   );
 };
