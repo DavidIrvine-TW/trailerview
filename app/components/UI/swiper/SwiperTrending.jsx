@@ -36,6 +36,7 @@ const SwiperTrending = ({ mediaType, data }) => {
               key={result.id}
               mediaType={mediaType}
             />
+             <div className="text-[10rem] text-primary-dark font-bold opacity-50 absolute top-[6%] right-[3%]  z-0">{index + 1}</div> 
           </SwiperSlide>
         ))}
       </Swiper>
