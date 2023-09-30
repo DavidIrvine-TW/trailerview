@@ -3,7 +3,7 @@ import SearchBar from "../../../../components/UI/searchbar/SearchBar";
 import SearchBarDesktopOnly from "../../../../components/UI/searchbar/SearchBarDesktopOnly";
 import CollectionPageTemplate from "../../../../components/UI/collections/CollectionPageTemplate";
 
-const page = ({ params }) => {
+const Page = ({ params }) => {
   return (
     <>
       <SearchBar placeholder="Search TV Series" searchPath="/search/tv/" />
@@ -23,4 +23,4 @@ const page = ({ params }) => {
   );
 };
 
-export default page;
+export default Page;

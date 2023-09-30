@@ -8,7 +8,7 @@ import Loading from "../../../../components/UI/load/Loading";
 import CardRegular from "@/app/components/cards/CardRegular";
 import PaginationComponent from "@/app/components/UI/pagination/PaginationComponent";
 
-const page = ({ params }) => {
+const Page = ({ params }) => {
   const [page, setPage] = useState(1);
   const query = params.id;
   const endpoint = `/api/search/movie/${query}?page=${page}`;
@@ -88,4 +88,4 @@ const page = ({ params }) => {
   );
 };
 
-export default page;
+export default Page;

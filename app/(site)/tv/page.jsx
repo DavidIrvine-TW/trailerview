@@ -9,7 +9,7 @@ import SearchBar from "@/app/components/UI/searchbar/SearchBar";
 import SearchBarDesktopOnly from "../../components/UI/searchbar/SearchBarDesktopOnly";
 import DefaultGenre from "@/app/components/UI/genre_template_page/DefaultGenre";
 
-const page = () => {
+const Page = () => {
   const router = useRouter();
   const endpoint = "/api/tv";
   const { data, error } = useSWR(endpoint, fetcher);
@@ -76,4 +76,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

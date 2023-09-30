@@ -10,7 +10,7 @@ import SearchBarDesktopOnly from "../../../../components/UI/searchbar/SearchBarD
 import GenrePagetemplate from "@/app/components/UI/genre_template_page/GenrePageTemplate";
 
 
-const page = ({params}) => {
+const Page = ({params}) => {
 
   const router = useRouter();
   const endpoint = "/api/movie";
@@ -32,7 +32,7 @@ const page = ({params}) => {
   // SWR 
   if (error) {
     console.error("Error:", error);
-    return <div className="text-surface text-center">Yikes! There was an error loading your data... please refresh the page.</div>;
+    return <div className="text-surface text-center">Yikes! There was an error loading your data... please refresh the Page.</div>;
   }
   
 
@@ -74,4 +74,4 @@ const page = ({params}) => {
   );
 };
 
-export default page;
+export default Page;

@@ -8,7 +8,7 @@ import Loading from "../../../components/UI/load/Loading";
 import CardRegular from "@/app/components/cards/CardRegular";
 import PaginationComponent from "@/app/components/UI/pagination/PaginationComponent";
 
-const page = ({ params }) => {
+const Page = ({ params }) => {
   const [page, setPage] = useState(1);
   const query = params.id;
   const endpoint = `/api/search/${query}?page=${page}`;
@@ -22,7 +22,7 @@ const page = ({ params }) => {
       </div>
     );
   }
-  
+
   //Remove people from results
   const dataFiltered = data
     ? data.results.filter((result) => result.media_type !== "person")
@@ -92,4 +92,4 @@ const page = ({ params }) => {
   );
 };
 
-export default page;
+export default Page;
