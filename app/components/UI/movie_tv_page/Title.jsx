@@ -42,7 +42,7 @@ function Title({
         </div>
 
         <div>
-          <div>
+          <div className="my-[1rem]">
             <button
               onClick={() => setPlayTrailer(true)}
               className={
@@ -57,12 +57,15 @@ function Title({
           </div>
 
           {/* select a trailer */}
-          <div className="flex flex-row gap-[.5rem] z-10 items-center">
+          <div className="flex flex-row gap-[.5rem] z-10 items-center text-primary">
             <button
               onClick={() => changeVideo(-1)}
               disabled={currentVideoIndex === 0}
+              className="text-inherit"
             >
-              <ArrowBackIosNewRoundedIcon /> Previous
+              <ArrowBackIosNewRoundedIcon sx={{color: 'inherit', "&:hover": {
+                            transform: "scale(1.2)",
+                          },}}/> Previous
             </button>
 
             <span>
@@ -73,7 +76,9 @@ function Title({
               onClick={() => changeVideo(1)}
               disabled={currentVideoIndex === keyAmount - 1}
             >
-              Next <ArrowForwardIosRoundedIcon />
+              Next <ArrowForwardIosRoundedIcon sx={{color: 'inherit', "&:hover": {
+                            transform: "scale(1.2)",
+                          },}}/>
             </button>
             <p>Title: {data.movieVideo.results[currentVideoIndex].name}</p>
           </div>
