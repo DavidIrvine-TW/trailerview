@@ -63,7 +63,7 @@ const GenrePagetemplate = ({ mediaType, params }) => {
       )}
 
       {data ? (
-        <div className="bg-background grid grid-cols-2 tb:grid-cols-3 dk:grid-cols-4 gap-y-2 gap-x-2 tb:gap-y-4 tb:gap-x-4 px-4 tb:px-6 dk:px-8 mt-[2rem]">
+        <div className="bg-background grid grid-cols-1 tb:grid-cols-3 dk:grid-cols-4 gap-y-2 gap-x-2 tb:gap-y-4 tb:gap-x-4 px-4 tb:px-6 dk:px-8 mt-[2rem]">
           {data.results.slice(8, 20).map((result) => (
             <CardRegular
               key={result.id}

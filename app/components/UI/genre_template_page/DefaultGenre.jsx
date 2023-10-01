@@ -47,7 +47,7 @@ const DefaultGenre = ({ endpoint, mediaType, title }) => {
 
           {/* display section */}
 
-          <div className="bg-background grid grid-cols-2 tb:grid-cols-3 dk:grid-cols-4 gap-y-2 gap-x-2 tb:gap-y-4 tb:gap-x-4 px-4 py-8 tb:px-6 dk:px-4 ">
+          <div className="bg-background grid grid-cols-1 tb:grid-cols-3 dk:grid-cols-4 gap-y-2 gap-x-2 tb:gap-y-4 tb:gap-x-4 px-4 py-8 tb:px-6 dk:px-4 ">
             {data?.results?.slice(0, 20).map((result) => (
               <CardRegular
                 key={result.id}
