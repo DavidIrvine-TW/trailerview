@@ -67,7 +67,7 @@ const Navbar = () => {
           <div className="dk:flex items-center">
             <NavLogoBtn />
             <span className="tracking-in-expand font-bold text-heading-md upprecase hidden dk:inline-flex text-surface">
-              Marv.Dev
+              TrailerView <span className="text-body-sm text-primary-dark">Marv.Dev</span>
             </span>
           </div>
           <div className="flex items-center ">
