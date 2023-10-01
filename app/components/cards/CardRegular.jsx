@@ -108,6 +108,27 @@ const CardRegular = ({ media_type, mediaType, result }) => {
 
   // process bookmark clicks
   const handleBookmarkClick = () => {
+
+    if (!session) {
+      // Display a toast message indicating that the user must sign in to use bookmarks
+      toast.info("You must sign in to use bookmarks", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        style: {
+          background: "#212121",
+          color: "#FC4747",
+          border: "2px solid #fafafa",
+        },
+      });
+      return;
+    }
+
     if (isBookmarked) {
       toast.info(
         `${result.title || result.orginal_name || result.name} removed `,
@@ -159,8 +180,8 @@ const CardRegular = ({ media_type, mediaType, result }) => {
         onMouseLeave={() => setHover(false)}
         className="fade-in rounded overflow-hidden relative w-full h-auto border border-transparent hover:shadow-md hover:border hover:bg-primary-light hover:border-surface"
       >
-        {/*display bookmark icons only when active session*/}
-        {session ? (
+        {/*display bookmark/nav icons */}
+       
           <div
             className={` ${playTitleHide} absolute top-[2%] left-0 right-0 bottom-[70%] flex justify-between gap-[.3rem] items-center z-10  `}
           >
@@ -272,9 +293,7 @@ const CardRegular = ({ media_type, mediaType, result }) => {
               )}
             </div>
           </div>
-        ) : (
-          ""
-        )}
+        
 
         {/*video close button*/}
         <button
@@ -322,14 +341,14 @@ const CardRegular = ({ media_type, mediaType, result }) => {
             </div>
           )}
 
-          {/* video title on hover && session*/}
-          {session ? (
+          {/* video title on hover */}
+        
             <div
               id="videoTitle"
               className={hover || screenSize ? "" : "hidden"}
             >
               <p
-                className={`${playTitleHide} text-body-sm text-center text-surface truncate text-ellipsis max-w-[150px]`}
+                className={`${playTitleHide} text-body-sm dk:text-body-md text-center text-surface truncate text-ellipsis max-w-[150px]`}
               >
                 {result &&
                   result.movieData &&
@@ -337,10 +356,7 @@ const CardRegular = ({ media_type, mediaType, result }) => {
                   result.movieData.results[currentVideoIndex].name}
               </p>
             </div>
-          ) : (
-            ""
-          )}
-
+            
           <div
             id="image-overlay"
             className="overlay absolute bottom-0 left-0 right-0 top-0  h-full bg-secondary  opacity-30 z-1 "

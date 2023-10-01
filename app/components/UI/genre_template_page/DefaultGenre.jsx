@@ -35,7 +35,7 @@ const DefaultGenre = ({ endpoint, mediaType, title }) => {
 
             {data ? (
               <div className="font-bold dk:text-body-md text-body-sm text-surface dk:mr-8">
-                <span>PAGE: {page}</span> OF
+                <span>PAGE: {page}</span> OF{" "}
                 <span>
                   {data?.total_pages > 500 ? "500" : data.total_pages}
                 </span>

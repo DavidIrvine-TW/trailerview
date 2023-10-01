@@ -34,6 +34,26 @@ const CardTrending = ({ mediaType, result }) => {
   };
 
   const handleBookmarkClick = () => {
+
+    if (!session) {
+      // Display a toast message indicating that the user must sign in to use bookmarks
+      toast.info("You must sign in to use bookmarks", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        style: {
+          background: "#212121",
+          color: "#FC4747",
+          border: "2px solid #fafafa",
+        },
+      });
+      return;
+    }
     if (isBookmarked) {
       toast.info(
         `${result.title || result.orginal_name || result.name} removed `,
@@ -163,11 +183,12 @@ const CardTrending = ({ mediaType, result }) => {
       {result.movieData?.results && playTrailer ? renderTrailer() : null}
 
       {/*display bookmark icons only when active session*/}
-      {session ? (
+    
         <div
           className={` ${playTitleHide} absolute top-[5%] left-0 right-0 bottom-[70%] flex justify-between gap-[.3rem] items-center z-20  `}
         >
           <div className="absolute top-[7%] right-[2%] flex flex-row gap-[.5rem] items-center">
+            
             {isBookmarked ? (
               <button type="button">
                 <CheckCircleOutlineRoundedIcon
@@ -202,6 +223,9 @@ const CardTrending = ({ mediaType, result }) => {
                 </button>
               </>
             )}
+
+
+
 
             <div className="z-10">
               <Link
@@ -275,9 +299,7 @@ const CardTrending = ({ mediaType, result }) => {
             )}
           </div>
         </div>
-      ) : (
-        ""
-      )}
+     
 
       {isHover ? (
         <>
@@ -322,14 +344,14 @@ const CardTrending = ({ mediaType, result }) => {
         ""
       )}
 
-      {/* video title on hover && session*/}
-      {session ? (
+      {/* video title on hover*/}
+   
         <div
           id="videoTitleTrending"
           className={isHover || screenSize ? "" : "hidden"}
         >
           <p
-            className={`${playTitleHide} text-body-sm text-center text-surface truncate text-ellipsis max-w-[150px]`}
+            className={`${playTitleHide} text-body-sm dk:text-body-md text-center text-surface truncate text-ellipsis max-w-[150px]`}
           >
             {result &&
               result.movieData &&
@@ -337,9 +359,7 @@ const CardTrending = ({ mediaType, result }) => {
               result.movieData.results[currentVideoIndex].name}
           </p>
         </div>
-      ) : (
-        ""
-      )}
+      
     </div>
   );
 };

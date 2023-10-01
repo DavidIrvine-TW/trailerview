@@ -33,9 +33,9 @@ const Navbar = () => {
   useEffect(() => {
     const scrollWatcher = document.querySelector("[data-scroll-watcher]");
     const headerObserver = new IntersectionObserver(handleScroll, {
-      root: null, // Use the viewport as the root
+      root: null, 
       rootMargin: "170px",
-      threshold: 0, // Trigger when scroll watcher is in the viewport
+      threshold: 0, 
     });
 
     if (scrollWatcher) {
