@@ -57,15 +57,15 @@ function Title({
           </div>
 
           {/* select a trailer */}
-          <div className="flex flex-row gap-[.5rem] z-10 items-center text-primary">
+          <div className="flex flex-row gap-[.5rem] z-10 items-center text-primary dk:text-body-md text-body-sm">
             <button
               onClick={() => changeVideo(-1)}
               disabled={currentVideoIndex === 0}
               className="text-inherit"
             >
-              <ArrowBackIosNewRoundedIcon sx={{color: 'inherit', "&:hover": {
+              <ArrowBackIosNewRoundedIcon sx={{color: 'inherit', fontSize: 'inherit', "&:hover": {
                             transform: "scale(1.2)",
-                          },}}/> Previous
+                          },}}/> 
             </button>
 
             <span>
@@ -76,7 +76,7 @@ function Title({
               onClick={() => changeVideo(1)}
               disabled={currentVideoIndex === keyAmount - 1}
             >
-              Next <ArrowForwardIosRoundedIcon sx={{color: 'inherit', "&:hover": {
+              <ArrowForwardIosRoundedIcon sx={{color: 'inherit',fontSize: 'inherit', "&:hover": {
                             transform: "scale(1.2)",
                           },}}/>
             </button>
