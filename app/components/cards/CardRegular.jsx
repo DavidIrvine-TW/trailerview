@@ -33,7 +33,7 @@ const CardRegular = ({ media_type, mediaType, result }) => {
   const { data: session } = useSession();
   const [playTrailer, setPlay] = useState(false);
   const [hover, setHover] = useState(false);
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+
   // const [visible, setVisible] = useState(false);
   const [screenSize, setScreenSize] = useState(false);
   const playTitleHide = playTrailer ? "invisible" : "visible";
@@ -41,21 +41,30 @@ const CardRegular = ({ media_type, mediaType, result }) => {
 
   const keyAmount = result.movieData?.results.length;
 
+  // check for officialTrailer
+  const officialTrailerIndex = result.movieData?.results.findIndex(
+    (item) => item.name === "Official Trailer"
+  );
+  // If "Official Trailer" is not found, default to the first key
+  const defaultVideoIndex = officialTrailerIndex !== -1 ? officialTrailerIndex : 0;
+  const [currentVideoIndex, setCurrentVideoIndex] =
+    useState(defaultVideoIndex);
+
   const changeVideo = (step) => {
     const newIndex = currentVideoIndex + step;
     if (newIndex >= 0 && newIndex < result.movieData?.results.length) {
       setCurrentVideoIndex(newIndex);
+    } else if (newIndex < 0) {
+      setCurrentVideoIndex(0); 
+    } else if (newIndex >= result.movieData?.results.length) {
+      setCurrentVideoIndex(result.movieData?.results.length - 1); 
     }
   };
 
   //Youtube player
   const renderTrailer = () => {
-    // check for officialTrailer if not available then selects the first valid key
-    const officialTrailer = result.movieData?.results.find(
-      (item) => item.name === "Official Trailer"
-    );
-    const defaultKey = officialTrailer
-      ? officialTrailer.key
+    const defaultKey = officialTrailerIndex
+      ? officialTrailerIndex.key
       : result.movieData.results[0]?.key; // Use optional chaining to handle potential null
 
     // Determine the key based on user's choice or the default key
@@ -108,7 +117,6 @@ const CardRegular = ({ media_type, mediaType, result }) => {
 
   // process bookmark clicks
   const handleBookmarkClick = () => {
-
     if (!session) {
       // Display a toast message indicating that the user must sign in to use bookmarks
       toast.info("You must sign in to use bookmarks", {
@@ -178,122 +186,123 @@ const CardRegular = ({ media_type, mediaType, result }) => {
       <div
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
-        className="fade-in rounded overflow-hidden relative w-full h-auto border border-transparent hover:shadow-md hover:border hover:bg-primary-light hover:border-surface"
+        className="fade-in rounded overflow-hidden relative w-full h-auto border border-transparent hover:shadow-md hover:border hover:bg-primary hover:border-surface"
       >
         {/*display bookmark/nav icons */}
-       
-          <div
-            className={` ${playTitleHide} absolute top-[2%] left-0 right-0 bottom-[70%] flex justify-between gap-[.3rem] items-center z-10  `}
-          >
-            <div className="absolute top-[5%] right-[2%] flex dk:flex-col gap-[.3rem] items-center">
-              {isBookmarked ? (
-                <button type="button">
-                  <CheckCircleOutlineRoundedIcon
-                    fontSize="medium"
-                    sx={{ zIndex: 8 }}
-                    onClick={handleBookmarkClick}
-                    style={{
-                      color: "green",
-                      "&:hover": {
-                        transform: "scale(1.2)",
-                        color: "red",
-                      },
-                    }}
-                  />
-                </button>
-              ) : (
-                <>
-                  <button type="button">
-                    <BookmarkAddOutlinedIcon
-                      fontSize="small"
-                      sx={{
-                        zIndex: 8,
-                        color: "#fafafa",
-                        cursor: "pointer",
-                        "&:hover": {
-                          transform: "scale(1.2)",
-                          color: "green",
-                        },
-                      }}
-                      onClick={handleBookmarkClick}
-                    />
-                  </button>
-                </>
-              )}
 
-              <div className="z-10">
-                <Link
-                  href={
-                    linkMediaType === "tv"
-                      ? `/tv/${result.id}`
-                      : `/movie/${result.id}`
-                  }
-                >
-                  <InfoOutlinedIcon
+        <div
+          className={` ${playTitleHide} absolute top-[2%] left-0 right-0 bottom-[70%] flex justify-between gap-[.3rem] items-center z-10  `}
+        >
+          <div className="absolute top-[5%] right-[2%] flex dk:flex-col gap-[.5rem] items-center p-1">
+            {isBookmarked ? (
+              <button type="button">
+                <CheckCircleOutlineRoundedIcon
+                  fontSize="medium"
+                  sx={{ zIndex: 8 }}
+                  onClick={handleBookmarkClick}
+                  style={{
+                    color: "green",
+                    "&:hover": {
+                      transform: "scale(1.2)",
+                      color: "red",
+                    },
+                  }}
+                />
+              </button>
+            ) : (
+              <>
+                <button type="button">
+                  <BookmarkAddOutlinedIcon
+                    fontSize="small"
                     sx={{
-                      color: "#fafafa",
+                      zIndex: 8,
+                      color: "#cfcfcf",
                       cursor: "pointer",
-                      transition: "transform 0.2s",
                       "&:hover": {
                         transform: "scale(1.2)",
                         color: "green",
                       },
                     }}
+                    onClick={handleBookmarkClick}
                   />
-                </Link>
-              </div>
-            </div>
+                </button>
+              </>
+            )}
 
-            {/* select a trailer */}
-            <div className="absolute left-[2%] top-[5%] gap-[.5rem] z-10">
-              {result.movieData?.results.length >= 1 ? (
-                <div>
-                  {result.movieData?.results.length === 1 ? (
-                    ""
-                  ) : (
-                    <>
-                      <button
-                        onClick={() => changeVideo(-1)}
-                        disabled={currentVideoIndex === 0}
-                      >
-                        <ArrowBackIosNewRoundedIcon
-                          fontSize="small"
-                          sx={{
-                            color: "#fafafa",
-                            "&:hover": {
-                              transform: "scale(1.2)",
-                            },
-                          }}
-                        />
-                      </button>
-                      <span className="text-body-sm text-surface">
-                        {currentVideoIndex} /{" "}
-                        {result.movieData?.results.length - 1}
-                      </span>
-
-                      <button
-                        onClick={() => changeVideo(1)}
-                        disabled={currentVideoIndex === keyAmount - 1}
-                      >
-                        <ArrowForwardIosRoundedIcon
-                          fontSize="small"
-                          sx={{
-                            color: "#fafafa",
-                            "&:hover": {
-                              transform: "scale(1.2)",
-                            },
-                          }}
-                        />
-                      </button>
-                    </>
-                  )}
-                </div>
-              ) : (
-                <p className="text-body-sm text-surface">No videos found</p>
-              )}
+            <div className="z-10">
+              <Link
+                href={
+                  linkMediaType === "tv"
+                    ? `/tv/${result.id}`
+                    : `/movie/${result.id}`
+                }
+              >
+                <InfoOutlinedIcon
+                  sx={{
+                    color: "#cfcfcf",
+                    cursor: "pointer",
+                    transition: "transform 0.2s",
+                    "&:hover": {
+                      transform: "scale(1.2)",
+                      color: "green",
+                    },
+                  }}
+                />
+              </Link>
             </div>
+            <div className="bg-background absolute top-0 bottom-0 right-0 left-0 opacity-50 rounded z-[-1]"/>
           </div>
-        
+
+          {/* select a trailer */}
+          <div className="absolute left-[2%] top-[5%] gap-[.5rem] z-10">
+            {result.movieData?.results.length >= 1 ? (
+              <div>
+                {result.movieData?.results.length === 1 ? (
+                  ""
+                ) : (
+                  <div className="rounded flex flex-row p-[2px] items-center justify-center shadow-md relative">
+                   
+                    <button
+                      onClick={() => changeVideo(-1)}
+                      disabled={currentVideoIndex === 0}
+                    >
+                      <ArrowBackIosNewRoundedIcon
+                        fontSize="small"
+                        sx={{
+                          color: "#cfcfcf",
+                          "&:hover": {
+                            transform: "scale(1.2)",
+                          },
+                        }}
+                      />
+                    </button>
+                    <span className="text-[.75rem] text-primary">
+                      <span className="font-bold">{currentVideoIndex}</span> / <span className="text-[.6rem]">{result.movieData?.results.length -1}</span>
+                    </span>
+
+                    <button
+                      onClick={() => changeVideo(1)}
+                      disabled={currentVideoIndex === keyAmount - 1}
+                    >
+                      <ArrowForwardIosRoundedIcon
+                        fontSize="small"
+                        sx={{
+                          color: "#cfcfcf",
+                          "&:hover": {
+                            transform: "scale(1.2)",
+                          },
+                        }}
+                      />
+                    </button>
+                    <div className="bg-background absolute top-0 bottom-0 right-0 left-0 opacity-50 rounded z-[-1]"/>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <p className="text-body-sm text-surface">No videos found</p>
+            )}
+          </div>
+        </div>
 
         {/*video close button*/}
         <button
@@ -342,21 +351,18 @@ const CardRegular = ({ media_type, mediaType, result }) => {
           )}
 
           {/* video title on hover */}
-        
-            <div
-              id="videoTitle"
-              className={hover || screenSize ? "" : "hidden"}
+
+          <div id="videoTitle" className={hover || screenSize ? "" : "hidden"}>
+            <p
+              className={`${playTitleHide} text-body-sm dk:text-body-md text-center text-primary truncate text-ellipsis max-w-[150px]`}
             >
-              <p
-                className={`${playTitleHide} text-body-sm dk:text-body-md text-center text-surface truncate text-ellipsis max-w-[150px]`}
-              >
-                {result &&
-                  result.movieData &&
-                  result.movieData.results[currentVideoIndex] &&
-                  result.movieData.results[currentVideoIndex].name}
-              </p>
-            </div>
-            
+              {result &&
+                result.movieData &&
+                result.movieData.results[currentVideoIndex] &&
+                result.movieData.results[currentVideoIndex].name}
+            </p>
+          </div>
+
           <div
             id="image-overlay"
             className="overlay absolute bottom-0 left-0 right-0 top-0  h-full bg-secondary  opacity-30 z-1 "

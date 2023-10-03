@@ -18,7 +18,6 @@ const CardTrending = ({ mediaType, result }) => {
   const [playTrailer, setPlay] = useState(false);
   const [isHover, setIsHover] = useState(false);
   const [screenSize, setScreenSize] = useState(false);
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const playTitleHide = playTrailer ? "invisible" : "visible";
 
   const { bookmarkedCards, addBookmark, removeBookmark } = useBookmarkContext();
@@ -26,10 +25,23 @@ const CardTrending = ({ mediaType, result }) => {
   const linkMediaType = result.media_type || mediaType;
   const keyAmount = result.movieData?.results.length;
 
+  // check for officialTrailer
+  const officialTrailerIndex = result.movieData?.results.findIndex(
+    (item) => item.name === "Official Trailer"
+  );
+  // If "Official Trailer" is not found, default to the first key
+  const defaultVideoIndex = officialTrailerIndex !== -1 ? officialTrailerIndex : 0;
+  const [currentVideoIndex, setCurrentVideoIndex] =
+    useState(defaultVideoIndex);
+
   const changeVideo = (step) => {
     const newIndex = currentVideoIndex + step;
     if (newIndex >= 0 && newIndex < result.movieData?.results.length) {
       setCurrentVideoIndex(newIndex);
+    } else if (newIndex < 0) {
+      setCurrentVideoIndex(0); // Set to 0 if it goes below 0
+    } else if (newIndex >= result.movieData?.results.length) {
+      setCurrentVideoIndex(result.movieData?.results.length - 1); 
     }
   };
 
@@ -185,9 +197,9 @@ const CardTrending = ({ mediaType, result }) => {
       {/*display bookmark icons only when active session*/}
     
         <div
-          className={` ${playTitleHide} absolute top-[5%] left-0 right-0 bottom-[70%] flex justify-between gap-[.3rem] items-center z-20  `}
+          className={` ${playTitleHide} absolute top-[5%] left-0 right-0 bottom-[70%] flex justify-between gap-[.5rem] items-center z-20  `}
         >
-          <div className="absolute top-[7%] right-[2%] flex flex-row gap-[.5rem] items-center">
+          <div className="absolute top-[7%] right-[2%] flex flex-row gap-[.5rem] items-center p-[2px]">
             
             {isBookmarked ? (
               <button type="button">
@@ -211,7 +223,7 @@ const CardTrending = ({ mediaType, result }) => {
                     fontSize="small"
                     sx={{
                       zIndex: 8,
-                      color: "#fafafa",
+                      color: "#cfcfcf",
                       cursor: "pointer",
                       "&:hover": {
                         transform: "scale(1.2)",
@@ -224,9 +236,6 @@ const CardTrending = ({ mediaType, result }) => {
               </>
             )}
 
-
-
-
             <div className="z-10">
               <Link
                 href={
@@ -237,7 +246,7 @@ const CardTrending = ({ mediaType, result }) => {
               >
                 <InfoOutlinedIcon
                   sx={{
-                    color: "#fafafa",
+                    color: "#cfcfcf",
                     cursor: "pointer",
                     transition: "transform 0.2s",
                     "&:hover": {
@@ -248,10 +257,11 @@ const CardTrending = ({ mediaType, result }) => {
                 />
               </Link>
             </div>
+            <div className="bg-background absolute top-0 bottom-0 right-0 left-0 opacity-50 rounded z-[-1]"/>
           </div>
 
           {/* select a trailer */}
-          <div className="absolute left-[2%] top-[5%] gap-[.5rem] z-9">
+          <div className="absolute left-[2%] top-[5%] gap-[.5rem] z-9 p-[2px]">
             {result.movieData?.results.length >= 1 ? (
               <div>
                 {result.movieData?.results.length === 1 ? (
@@ -265,16 +275,15 @@ const CardTrending = ({ mediaType, result }) => {
                       <ArrowBackIosNewRoundedIcon
                         fontSize="small"
                         sx={{
-                          color: "#fafafa",
+                          color: "#cfcfcf",
                           "&:hover": {
                             transform: "scale(1.2)",
                           },
                         }}
                       />
                     </button>
-                    <span className="text-body-sm text-surface">
-                      {currentVideoIndex} /{" "}
-                      {result.movieData?.results.length - 1}
+                    <span className="text-[.75rem] text-primary">
+                      <span className="font-bold">{currentVideoIndex}</span> / <span className="text-[.6rem]">{result.movieData?.results.length -1}</span>
                     </span>
 
                     <button
@@ -284,7 +293,7 @@ const CardTrending = ({ mediaType, result }) => {
                       <ArrowForwardIosRoundedIcon
                         fontSize="small"
                         sx={{
-                          color: "#fafafa",
+                          color: "#cfcfcf",
                           "&:hover": {
                             transform: "scale(1.2)",
                           },
@@ -293,11 +302,13 @@ const CardTrending = ({ mediaType, result }) => {
                     </button>
                   </>
                 )}
+                <div className="bg-background absolute top-0 bottom-0 right-0 left-0 opacity-50 rounded z-[-1]"/>
               </div>
             ) : (
-              <p className="text-body-sm text-surface">No videos found</p>
+              <p className="text-body-sm text-primary">No videos found</p>
             )}
           </div>
+          
         </div>
      
 

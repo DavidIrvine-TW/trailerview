@@ -30,7 +30,7 @@ const Collection = ({ endpoint, href, title, tag, mediaType }) => {
             collType="normal"
           />
 
-          <div className="grid grid-cols-1 tb:grid-cols-3 dk:grid-cols-5 gap-y-2 gap-x-2 tb:gap-y-4 tb:gap-x-3 px-4 tb:px-6 dk:px-8 mb-[2rem] bg-background">
+          <div className="grid grid-cols-1 tb:grid-cols-3 dk:grid-cols-5 gap-y-2 gap-x-2 tb:gap-y-4 tb:gap-x-3 px-4 tb:px-6 dk:p-8 mb-[2rem] bg-background rounded ">
             {data.results.slice(0, 10).map((result) => (
               <CardRegular
                 key={result.id}

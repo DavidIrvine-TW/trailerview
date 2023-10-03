@@ -325,14 +325,14 @@ img {
   ); 
   z-index: 9;
 }
-@media screen and (max-width: 600px) {
+/* @media screen and (max-width: 600px) {
   #videoTitle {
     top: 75%;
   }
   #videoTitleTrending {
     top: 60%
   }
-}
+} */
 
 
 

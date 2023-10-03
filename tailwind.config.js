@@ -18,6 +18,7 @@ module.exports = {
         'surface' : '#fafafa',
         'blood' : '#FC4747',
         'background' : '#212121',
+        'background-light': '#e0e0e0',
         'lightgray'  : '#e0e0e0',
       },
       fontSize: {

@@ -12,12 +12,12 @@ const PageInfo = ({ setDisplayHandler, display }) => {
 
   return (
     <div>
-      <div className="flex items-center text-center">
-        <p className="text-surface">
-          <span className="font-bold">Welcome:</span> {session ?  (session.user.email) : ( 'sign in to create a list')} 
+      <div className="flex justify-between items-center text-center">
+        <p className="text-primary mb-[.5rem]">
+          <span className="font-bold">Welcome:</span> {session ?  (session.user.email) : ( 'Not signed in')} 
         </p>
       </div>
-      <div className="flex flex-row gap-[2rem] text-body py-2">
+      <div className="flex flex-row gap-[2rem] text-body pt-4">
         <ToggleButtonGroup
           color="primary"
           value={display}
