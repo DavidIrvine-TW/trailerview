@@ -197,9 +197,9 @@ const CardTrending = ({ mediaType, result }) => {
       {/*display bookmark icons only when active session*/}
     
         <div
-          className={` ${playTitleHide} absolute top-[5%] left-0 right-0 bottom-[70%] flex justify-between gap-[.5rem] items-center z-20  `}
+          className={` ${playTitleHide} absolute top-[5%] left-0 right-0 bottom-[70%] flex justify-between gap-[.5rem] items-center z-20 `}
         >
-          <div className="absolute top-[7%] right-[2%] flex flex-row gap-[.5rem] items-center p-[2px]">
+          <div className="absolute top-[7%] right-[2%] flex flex-row gap-[.5rem] items-center p-[2px] shadow-md">
             
             {isBookmarked ? (
               <button type="button">
@@ -261,7 +261,7 @@ const CardTrending = ({ mediaType, result }) => {
           </div>
 
           {/* select a trailer */}
-          <div className="absolute left-[2%] top-[5%] gap-[.5rem] z-9 p-[2px]">
+          <div className="absolute left-[2%] top-[5%] gap-[.5rem] z-9 p-[2px] shadow-md">
             {result.movieData?.results.length >= 1 ? (
               <div>
                 {result.movieData?.results.length === 1 ? (

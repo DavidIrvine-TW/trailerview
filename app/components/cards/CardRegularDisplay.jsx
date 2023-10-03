@@ -35,7 +35,7 @@ const CardRegularDisplay = ({
         )}
       </div>
       <p
-        className={`${hoverTitleColor} z-10 truncate text-ellipsis font-bold text-body-md tb:text-heading-xs`}
+        className={`${hoverTitleColor} z-10 truncate text-ellipsis font-bold text-heading-xs`}
       >
         {result.title ||
           result.original_title ||

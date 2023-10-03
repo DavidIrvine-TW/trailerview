@@ -193,7 +193,7 @@ const CardRegular = ({ media_type, mediaType, result }) => {
         <div
           className={` ${playTitleHide} absolute top-[2%] left-0 right-0 bottom-[70%] flex justify-between gap-[.3rem] items-center z-10  `}
         >
-          <div className="absolute top-[5%] right-[2%] flex dk:flex-col gap-[.5rem] items-center p-1">
+          <div className="absolute top-[5%] right-[2%] flex dk:flex-col gap-[.5rem] items-center p-1 shadow-md">
             {isBookmarked ? (
               <button type="button">
                 <CheckCircleOutlineRoundedIcon
@@ -254,13 +254,13 @@ const CardRegular = ({ media_type, mediaType, result }) => {
           </div>
 
           {/* select a trailer */}
-          <div className="absolute left-[2%] top-[5%] gap-[.5rem] z-10">
+          <div className="absolute left-[2%] top-[5%] gap-[.5rem] z-10 shadow-md">
             {result.movieData?.results.length >= 1 ? (
               <div>
                 {result.movieData?.results.length === 1 ? (
                   ""
                 ) : (
-                  <div className="rounded flex flex-row p-[2px] items-center justify-center shadow-md relative">
+                  <div className="rounded flex flex-row p-[2px] items-center justify-center  relative">
                    
                     <button
                       onClick={() => changeVideo(-1)}
@@ -309,7 +309,7 @@ const CardRegular = ({ media_type, mediaType, result }) => {
           onClick={() => setPlay(false)}
           className={
             playTrailer
-              ? "flex items-center gap-[.5rem] text-surface absolute top-[80%] left-[1rem] z-[1000000] bg-background cursor-pointer text-body border border-surface px-2 "
+              ? "flex items-center gap-[.5rem] text-surface absolute top-[80%] left-[1rem] z-[1000000] bg-background cursor-pointer text-body border border-surface px-2 shadow-md "
               : "hidden"
           }
         >
@@ -354,7 +354,7 @@ const CardRegular = ({ media_type, mediaType, result }) => {
 
           <div id="videoTitle" className={hover || screenSize ? "" : "hidden"}>
             <p
-              className={`${playTitleHide} text-body-sm dk:text-body-md text-center text-primary truncate text-ellipsis max-w-[150px]`}
+              className={`${playTitleHide} text-body-md text-center text-primary truncate text-ellipsis max-w-[150px]`}
             >
               {result &&
                 result.movieData &&
