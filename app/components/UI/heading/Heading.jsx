@@ -8,8 +8,8 @@ const Heading = ({ title, tag, href, mediaType, collType }) => {
   const effect = headingTracking ? "text-surface" : "text-primary";
 
   return (
-    <article className="overflow-hidden px-4 tb:px-6 dk:px-8">
-      <div className="flex justify-between items-center py-2 ">
+    <article className="overflow-hidden px-4 tb:px-6 dk:px-8 flex justify-between items-center py-2 mb-[1rem]">
+      
         <div className="flex items-center">
           <Link href={href}>
             <div
@@ -27,7 +27,7 @@ const Heading = ({ title, tag, href, mediaType, collType }) => {
             <SeeMoreBtn onClick={() => {}} />
           </Link>
         </div>
-      </div>
+    
     </article>
   );
 };

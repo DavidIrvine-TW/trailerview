@@ -6,7 +6,7 @@ const CardRegularImage = ({ result }) => {
    
       <Image
         className="z-0 rounded"
-        src={result.backdrop_path ? `https://image.tmdb.org/t/p/w300/${result.backdrop_path}` : `https://image.tmdb.org/t/p/w300/${result.poster_path}`}
+        src={result.backdrop_path ? `https://image.tmdb.org/t/p/w780/${result.backdrop_path}` : `https://image.tmdb.org/t/p/w300/${result.poster_path}`}
         style={{ objectFit: "cover" }} 
         width={500} 
         height={300}

@@ -19,9 +19,9 @@ import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRound
 //Tilt opts
 const defaultOptions = {
   reverse: false, // reverse the tilt direction
-  max: 10, // max tilt rotation (degrees)
+  max: 3, // max tilt rotation (degrees)
   perspective: 1000, // Transform perspective, the lower the more extreme the tilt gets.
-  scale: 1.05, // 2 = 200%, 1.5 = 150%, etc..
+  scale: 1.01, // 2 = 200%, 1.5 = 150%, etc..
   speed: 1000, // Speed of the enter/exit transition
   transition: true, // Set a transition on enter/exit.
   axis: null, // What axis should be disabled. Can be X or Y.
@@ -186,19 +186,27 @@ const CardRegular = ({ media_type, mediaType, result }) => {
       <div
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
-        className="fade-in rounded overflow-hidden relative w-full h-auto border border-transparent hover:shadow-md hover:border hover:bg-primary hover:border-surface"
+        className="fade-in  rounded-[2px] overflow-hidden relative w-full h-auto border border-transparent hover:shadow-md hover:border hover:bg-primary hover:border-primary"
       >
         {/*display bookmark/nav icons */}
 
         <div
           className={` ${playTitleHide} absolute top-[2%] left-0 right-0 bottom-[70%] flex justify-between gap-[.3rem] items-center z-10  `}
         >
+
+
           <div className="absolute top-[5%] right-[2%] flex dk:flex-col gap-[.5rem] items-center p-1 shadow-md">
+
+
             {isBookmarked ? (
+
               <button type="button">
+                
                 <CheckCircleOutlineRoundedIcon
                   fontSize="medium"
-                  sx={{ zIndex: 8 }}
+                  sx={{ 
+                    zIndex: 8 
+                  }}
                   onClick={handleBookmarkClick}
                   style={{
                     color: "green",
@@ -208,6 +216,7 @@ const CardRegular = ({ media_type, mediaType, result }) => {
                     },
                   }}
                 />
+
               </button>
             ) : (
               <>
@@ -320,7 +329,7 @@ const CardRegular = ({ media_type, mediaType, result }) => {
         {result.movieData?.results && playTrailer ? renderTrailer() : null}
 
         {/* title backdrop/poster image  */}
-        <div className="relative w-full bg-primary overflow-hidden  dk:max-h-[178px]">
+        <div className="relative w-full bg-primary overflow-hidden">
           <CardRegularImage result={result} />
           {/* display play button only if there is video */}
           {result.movieData?.results.length === 0 ? (
@@ -354,7 +363,7 @@ const CardRegular = ({ media_type, mediaType, result }) => {
 
           <div id="videoTitle" className={hover || screenSize ? "" : "hidden"}>
             <p
-              className={`${playTitleHide} text-body-md text-center text-primary truncate text-ellipsis max-w-[150px]`}
+              className={`${playTitleHide} text-body-md text-center text-primary truncate text-ellipsis max-w-[150px] bg-background bg-opacity-50 rounded px-1`}
             >
               {result &&
                 result.movieData &&
@@ -365,7 +374,7 @@ const CardRegular = ({ media_type, mediaType, result }) => {
 
           <div
             id="image-overlay"
-            className="overlay absolute bottom-0 left-0 right-0 top-0  h-full bg-secondary  opacity-30 z-1 "
+            className="overlay absolute bottom-0 left-0 right-0 top-0  h-full bg-background  opacity-30 z-1 "
           />
         </div>
 

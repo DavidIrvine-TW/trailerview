@@ -35,10 +35,15 @@ const MainPageTV = ({ params }) => {
   return (
     <>
       {/* header section */}
+
       {/* searchbar small screens */}
+
       <SearchBar placeholder="Search TV Series" searchPath="/search/tv/" />
+
       {/* maincontent */}
+
       <section className="bg-surface dk:bg-background ">
+        
         {/* body section */}
         {data ? (
           // display desktop only

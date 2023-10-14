@@ -17,7 +17,7 @@ const CollectionTrending = ({ endpoint, href, title, tag, mediaType }) => {
   return (
     <>
       {data ? (
-        <section id="homeTrendingCards" className="mx-auto bg-background  ">
+        <section id="homeTrendingCards" className="mx-auto bg-background  mb-[2rem]">
           <Heading title={title} tag={tag} href={href} mediaType={mediaType} />
 
           <div className="min-w-[375px]">

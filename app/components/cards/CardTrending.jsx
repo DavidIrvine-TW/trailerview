@@ -163,6 +163,8 @@ const CardTrending = ({ mediaType, result }) => {
     };
   }, []);
 
+
+
   return (
     <div
       onMouseEnter={() => {
@@ -177,7 +179,7 @@ const CardTrending = ({ mediaType, result }) => {
           setIsHover(false);
         }
       }}
-      className="relative w-full max-h-[240px] overflow-hidden cursor-pointer py-2"
+      className="relative w-full h-[285px] overflow-hidden cursor-pointer py-2"
     >
       <CardTrendingImage result={result} />
 
@@ -315,7 +317,7 @@ const CardTrending = ({ mediaType, result }) => {
       {isHover ? (
         <>
           {/* OVERLAY */}
-          <div className="overlay absolute bottom-0 left-0 right-0 top-0  h-full bg-background  opacity-40 z-1 " />
+          <div className="overlay absolute bottom-0 left-0 right-0 top-0  h-full bg-background  opacity-60 z-1 " />
           {/* TITLE DETAILS */}
           <CardTrendingDisplay
             result={result}

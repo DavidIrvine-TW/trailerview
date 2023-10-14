@@ -11,7 +11,7 @@ const SwiperTrending = ({ mediaType, data }) => {
   return (
     <>
       <Swiper
-        className="w-full max-h-[250px] h-[250px]  bg-background"
+        className="w-full h-[285px]  bg-background"
         modules={[Navigation, Pagination, Scrollbar, A11y]}
         spaceBetween={4}
         navigation={true}
@@ -36,7 +36,7 @@ const SwiperTrending = ({ mediaType, data }) => {
               key={result.id}
               mediaType={mediaType}
             />
-             <div className="text-[10rem] text-primary-dark font-bold opacity-50 absolute top-[6%] right-[3%]  z-0">{index + 1}</div> 
+             <div className="text-[10rem] text-primary-dark font-bold opacity-50 absolute bottom-[-9%] right-[3%]  z-0">{index + 1}</div> 
           </SwiperSlide>
         ))}
       </Swiper>

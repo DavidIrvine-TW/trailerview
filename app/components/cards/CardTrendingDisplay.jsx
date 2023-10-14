@@ -8,7 +8,7 @@ const CardTrendingDisplay = ({ result, mediaType, playTrailer }) => {
   const hideTitleOnPlay = playTrailer ? "invisible " : "visible";
 
   return (
-    <div className={` ${hideTitleOnPlay} absolute z-20 w-full bottom-0`}>
+    <div className={` ${hideTitleOnPlay} absolute z-20 w-full bottom-0 p-1`}>
       <div className="fade-in relative z-1000 py-2 px-3 dk:px-4">
         <div className="flex w-full items-center gap-[.4rem] text-primary-dark">
           <p className="text-[11px] dk:text-body-md">{year}</p>
