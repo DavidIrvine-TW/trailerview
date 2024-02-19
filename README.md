@@ -5,6 +5,15 @@ TrailerView is an entertainment app for movie/TV buffs which grants immediate an
 Content of particular interest can be bookmarked and retrieved across devices. This feature is powered by NextAuth for user authentication and MongoDb for bookmark storage and retrieval. 
 
 Powered by [TMDB](https://www.themoviedb.org/?language=en-US). Built with [Next.js 13](https://nextjs.org/). Deployed on [Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
+
+Tech:  
+
+
+ <img src="https://skillicons.dev/icons?i=nextjs" alt="skills-icons"/> <img src="https://skillicons.dev/icons?i=tailwind" alt="skills-icons"/>
+ <img src="https://skillicons.dev/icons?i=mongodb" alt="skills-icons"/> <img src="https://skillicons.dev/icons?i=nodejs" alt="skills-icons"/>
+ <img src="https://skillicons.dev/icons?i=vercel" alt="skills-icons"/> <img src="https://skillicons.dev/icons?i=materialui" alt="skills-icons"/>
+
+ 
 ## To get started
 
 If you want to improve upon this project just fork the repo add your code then submit a pull request, alternatively for a local copy, just clone the repo, simple! 
