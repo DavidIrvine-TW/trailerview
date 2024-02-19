@@ -1,5 +1,8 @@
 # Trailerview
 
+TrailerView is an entertainment app for movie/TV buffs which grants immediate and full access across all collections and titles to TMDB's available Youtube content. Upon page load each content window has access to all currently available content; just use the next and prev buttons to browse and the click play to view.
+
+Content of particular interest can be bookmarked and retrieved across devices. This feature is powered by NextAuth for user authentication and MongoDb for bookmark storage and retrieval. 
 
 Powered by [TMDB](https://www.themoviedb.org/?language=en-US). Built with [Next.js 13](https://nextjs.org/). Deployed on [Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
 ## To get started
