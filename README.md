@@ -42,6 +42,7 @@ TrailerView makes use of the following packages:
 - [SWR](https://www.npmjs.com/package/swr)
 - [RippleHook](https://www.npmjs.com/package/use-ripple-hook)
 - [Tailwind](https://tailwindcss.com/)
+- [NextAuth](https://next-auth.js.org/)
 
 
 ### TrailerView Screenshots
