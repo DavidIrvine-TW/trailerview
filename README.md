@@ -33,7 +33,7 @@ TrailerView makes use of the following packages:
 - [React-Shimmer](https://www.npmjs.com/package/react-shimmer)
 - [React-SocialMediaIcons](https://www.npmjs.com/package/react-social-icons)
 - [ReactTilt](https://www.npmjs.com/package/react-tilt)
-- [reactToastify](https://www.npmjs.com/package/react-toastify)
+- [ReactToastify](https://www.npmjs.com/package/react-toastify)
 - [ReactTooltip](https://www.npmjs.com/package/react-tooltip)
 - [ReactYoutube](https://www.npmjs.com/package/react-youtube)
 - [SWR](https://www.npmjs.com/package/swr)
