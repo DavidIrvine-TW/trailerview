@@ -1,6 +1,6 @@
 # TrailerView
 
-TrailerView is an entertainment app for movie/TV buffs which grants immediate and full access across all collections and titles to TMDB's available Youtube content. Upon page load each content window has access to all currently available content; just use the next and prev buttons to browse and the click play to view.
+TrailerView is an entertainment app for movie/TV buffs which grants immediate and full access across all collections and titles to TMDB's available Youtube content. Upon page load each content window has access to all currently available content; just use the next and prev buttons to browse and then click play to view.
 
 Content of particular interest can be bookmarked and retrieved across devices. This feature is powered by NextAuth for user authentication and MongoDb for bookmark storage and retrieval. 
 
