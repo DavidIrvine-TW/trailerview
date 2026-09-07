@@ -1,0 +1,3 @@
+scripts:
+  setup: |
+    ln -sf "$ORCA_ROOT_PATH/.env.local" "$ORCA_WORKTREE_PATH/.env.local"
