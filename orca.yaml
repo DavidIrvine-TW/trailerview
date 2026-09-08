@@ -1,3 +1,5 @@
 scripts:
   setup: |
-    ln -sf "$ORCA_ROOT_PATH/.env.local" "$ORCA_WORKTREE_PATH/.env.local"
+    for f in "$ORCA_ROOT_PATH"/.env*; do
+      [ -f "$f" ] && ln -sf "$f" "$ORCA_WORKTREE_PATH/$(basename "$f")"
+    done
