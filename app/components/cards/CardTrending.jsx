@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import CardTrendingDisplay from "./CardTrendingDisplay";
 import CardTrendingImage from "./CardTrendingImage";
 import YouTube from "react-youtube";
@@ -23,25 +23,31 @@ const CardTrending = ({ mediaType, result }) => {
   const { bookmarkedCards, addBookmark, removeBookmark } = useBookmarkContext();
   const isBookmarked = bookmarkedCards.some((c) => c.id === result.id);
   const linkMediaType = result.media_type || mediaType;
-  const keyAmount = result.movieData?.results.length;
+  // reorder videos so "Official Trailer" (if present) is always first, so browsing always starts at 1
+  const videos = useMemo(() => {
+    const results = result.movieData?.results || [];
+    const officialTrailerIndex = results.findIndex(
+      (item) => item.name === "Official Trailer"
+    );
+    if (officialTrailerIndex <= 0) return results;
+    return [
+      results[officialTrailerIndex],
+      ...results.slice(0, officialTrailerIndex),
+      ...results.slice(officialTrailerIndex + 1),
+    ];
+  }, [result.movieData]);
+  const keyAmount = videos.length;
 
-  // check for officialTrailer
-  const officialTrailerIndex = result.movieData?.results.findIndex(
-    (item) => item.name === "Official Trailer"
-  );
-  // If "Official Trailer" is not found, default to the first key
-  const defaultVideoIndex = officialTrailerIndex !== -1 ? officialTrailerIndex : 0;
-  const [currentVideoIndex, setCurrentVideoIndex] =
-    useState(defaultVideoIndex);
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
   const changeVideo = (step) => {
     const newIndex = currentVideoIndex + step;
-    if (newIndex >= 0 && newIndex < result.movieData?.results.length) {
+    if (newIndex >= 0 && newIndex < videos.length) {
       setCurrentVideoIndex(newIndex);
     } else if (newIndex < 0) {
       setCurrentVideoIndex(0); // Set to 0 if it goes below 0
-    } else if (newIndex >= result.movieData?.results.length) {
-      setCurrentVideoIndex(result.movieData?.results.length - 1); 
+    } else if (newIndex >= videos.length) {
+      setCurrentVideoIndex(videos.length - 1);
     }
   };
 
@@ -111,18 +117,7 @@ const CardTrending = ({ mediaType, result }) => {
   };
 
   const renderTrailer = () => {
-    const officialTrailer = result.movieData?.results.find(
-      (item) => item.name === "Official Trailer"
-    );
-    const defaultKey = officialTrailer
-      ? officialTrailer.key
-      : result.movieData.results[0]?.key; // Use optional chaining to handle potential null
-
-    // Determine the key based on user's choice or the default key
-    const key =
-      currentVideoIndex !== null
-        ? result.movieData?.results[currentVideoIndex].key
-        : defaultKey;
+    const key = videos[currentVideoIndex]?.key;
 
     return (
       <YouTube
@@ -168,7 +163,7 @@ const CardTrending = ({ mediaType, result }) => {
   return (
     <div
       onMouseEnter={() => {
-        if (result.movieData.results.length > 0) {
+        if (videos.length > 0) {
           setIsHover(true);
         }
       }}
@@ -194,7 +189,7 @@ const CardTrending = ({ mediaType, result }) => {
         CLOSE
       </button>
 
-      {result.movieData?.results && playTrailer ? renderTrailer() : null}
+      {videos.length > 0 && playTrailer ? renderTrailer() : null}
 
       {/*display bookmark icons only when active session*/}
     
@@ -264,9 +259,9 @@ const CardTrending = ({ mediaType, result }) => {
 
           {/* select a trailer */}
           <div className="absolute left-[2%] top-[5%] gap-[.5rem] z-9 p-[2px] shadow-md">
-            {result.movieData?.results.length >= 1 ? (
+            {videos.length >= 1 ? (
               <div>
-                {result.movieData?.results.length === 1 ? (
+                {videos.length === 1 ? (
                   ""
                 ) : (
                   <>
@@ -285,7 +280,7 @@ const CardTrending = ({ mediaType, result }) => {
                       />
                     </button>
                     <span className="text-[.75rem] text-primary">
-                      <span className="font-bold">{currentVideoIndex}</span> / <span className="text-[.6rem]">{result.movieData?.results.length -1}</span>
+                      <span className="font-bold">{currentVideoIndex + 1}</span> / <span className="text-[.6rem]">{videos.length}</span>
                     </span>
 
                     <button
@@ -326,7 +321,7 @@ const CardTrending = ({ mediaType, result }) => {
           />
 
           {/* PLAYBUTTON */}
-          {result.movieData?.results.length === 0 ? (
+          {videos.length === 0 ? (
             ""
           ) : (
             <div
@@ -366,10 +361,7 @@ const CardTrending = ({ mediaType, result }) => {
           <p
             className={`${playTitleHide} text-body-sm dk:text-body-md text-center text-surface truncate text-ellipsis max-w-[150px]`}
           >
-            {result &&
-              result.movieData &&
-              result.movieData.results[currentVideoIndex] &&
-              result.movieData.results[currentVideoIndex].name}
+            {videos[currentVideoIndex] && videos[currentVideoIndex].name}
           </p>
         </div>
       

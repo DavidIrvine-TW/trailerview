@@ -4,7 +4,7 @@ import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlin
 import CardRegularDisplay from "./CardRegularDisplay";
 import CardRegularImage from "./CardRegularImage";
 import { Tilt } from "react-tilt";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import YouTube from "react-youtube";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import { useSession } from "next-auth/react";
@@ -39,39 +39,37 @@ const CardRegular = ({ media_type, mediaType, result }) => {
   const playTitleHide = playTrailer ? "invisible" : "visible";
   const linkMediaType = result.media_type || mediaType;
 
-  const keyAmount = result.movieData?.results.length;
+  // reorder videos so "Official Trailer" (if present) is always first, so browsing always starts at 1
+  const videos = useMemo(() => {
+    const results = result.movieData?.results || [];
+    const officialTrailerIndex = results.findIndex(
+      (item) => item.name === "Official Trailer"
+    );
+    if (officialTrailerIndex <= 0) return results;
+    return [
+      results[officialTrailerIndex],
+      ...results.slice(0, officialTrailerIndex),
+      ...results.slice(officialTrailerIndex + 1),
+    ];
+  }, [result.movieData]);
+  const keyAmount = videos.length;
 
-  // check for officialTrailer
-  const officialTrailerIndex = result.movieData?.results.findIndex(
-    (item) => item.name === "Official Trailer"
-  );
-  // If "Official Trailer" is not found, default to the first key
-  const defaultVideoIndex = officialTrailerIndex !== -1 ? officialTrailerIndex : 0;
-  const [currentVideoIndex, setCurrentVideoIndex] =
-    useState(defaultVideoIndex);
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
   const changeVideo = (step) => {
     const newIndex = currentVideoIndex + step;
-    if (newIndex >= 0 && newIndex < result.movieData?.results.length) {
+    if (newIndex >= 0 && newIndex < videos.length) {
       setCurrentVideoIndex(newIndex);
     } else if (newIndex < 0) {
-      setCurrentVideoIndex(0); 
-    } else if (newIndex >= result.movieData?.results.length) {
-      setCurrentVideoIndex(result.movieData?.results.length - 1); 
+      setCurrentVideoIndex(0);
+    } else if (newIndex >= videos.length) {
+      setCurrentVideoIndex(videos.length - 1);
     }
   };
 
   //Youtube player
   const renderTrailer = () => {
-    const defaultKey = officialTrailerIndex
-      ? officialTrailerIndex.key
-      : result.movieData.results[0]?.key; // Use optional chaining to handle potential null
-
-    // Determine the key based on user's choice or the default key
-    const key =
-      currentVideoIndex !== null
-        ? result.movieData?.results[currentVideoIndex].key
-        : defaultKey;
+    const key = videos[currentVideoIndex]?.key;
 
     return (
       <YouTube
@@ -264,9 +262,9 @@ const CardRegular = ({ media_type, mediaType, result }) => {
 
           {/* select a trailer */}
           <div className="absolute left-[2%] top-[5%] gap-[.5rem] z-10 shadow-md">
-            {result.movieData?.results.length >= 1 ? (
+            {videos.length >= 1 ? (
               <div>
-                {result.movieData?.results.length === 1 ? (
+                {videos.length === 1 ? (
                   ""
                 ) : (
                   <div className="rounded flex flex-row p-[2px] items-center justify-center  relative">
@@ -286,7 +284,7 @@ const CardRegular = ({ media_type, mediaType, result }) => {
                       />
                     </button>
                     <span className="text-[.75rem] text-primary">
-                      <span className="font-bold">{currentVideoIndex}</span> / <span className="text-[.6rem]">{result.movieData?.results.length -1}</span>
+                      <span className="font-bold">{currentVideoIndex + 1}</span> / <span className="text-[.6rem]">{videos.length}</span>
                     </span>
 
                     <button
@@ -326,13 +324,13 @@ const CardRegular = ({ media_type, mediaType, result }) => {
         </button>
 
         {/* Youtube player requires video results and playtrailer = true  */}
-        {result.movieData?.results && playTrailer ? renderTrailer() : null}
+        {videos.length > 0 && playTrailer ? renderTrailer() : null}
 
         {/* title backdrop/poster image  */}
         <div className="relative w-full bg-primary overflow-hidden">
           <CardRegularImage result={result} />
           {/* display play button only if there is video */}
-          {result.movieData?.results.length === 0 ? (
+          {videos.length === 0 ? (
             ""
           ) : (
             <div
@@ -365,10 +363,7 @@ const CardRegular = ({ media_type, mediaType, result }) => {
             <p
               className={`${playTitleHide} text-body-md text-center text-primary truncate text-ellipsis max-w-[150px] bg-background bg-opacity-50 rounded px-1`}
             >
-              {result &&
-                result.movieData &&
-                result.movieData.results[currentVideoIndex] &&
-                result.movieData.results[currentVideoIndex].name}
+              {videos[currentVideoIndex] && videos[currentVideoIndex].name}
             </p>
           </div>
 
